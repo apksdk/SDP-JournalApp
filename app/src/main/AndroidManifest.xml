@@ -9,13 +9,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".ViewJournalsActivity"
+            android:label="@string/title_activity_view_journals"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateJournalActivity"
+            android:label="@string/title_activity_create_journal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewEntriesActivity"
+            android:label="@string/title_activity_view_entries"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewEntryActivity"
+            android:label="@string/title_activity_view_entry"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateEntryActivity"
+            android:label="@string/title_activity_create_entry"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EntryHistoryActivity"
+            android:label="@string/title_activity_entry_history"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
