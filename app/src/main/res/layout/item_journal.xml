@@ -23,7 +23,7 @@
         android:id="@+id/recordedEntriesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/journalTitleTV"
+        android:layout_below="@+id/journalTitleTV"
         android:layout_toRightOf="@+id/journalPreviewIV"
         android:text="5 Recorded Entries" />
 
