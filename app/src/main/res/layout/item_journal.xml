@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="8/27/2017 4:20PM" />
+
+    <TextView
+        android:id="@+id/descriptionTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recordedEntriesTV"
+        android:layout_toRightOf="@+id/journalPreviewIV"
+        android:text="Short Description" />
+
+    <TextView
+        android:id="@+id/recordedEntriesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/journalTitleTV"
+        android:layout_toRightOf="@+id/journalPreviewIV"
+        android:text="5 Recorded Entries" />
+
+    <TextView
+        android:id="@+id/journalTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/journalPreviewIV"
+        android:text="Journal #1" />
+
+    <ImageView
+        android:id="@+id/journalPreviewIV"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+</RelativeLayout>
