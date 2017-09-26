@@ -31,11 +31,12 @@
         android:id="@+id/usernameET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logoTV"
-        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="Email/Username"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:layout_below="@+id/logoTV"
+        android:layout_alignLeft="@+id/passwordET"
+        android:layout_alignStart="@+id/passwordET" />
 
     <EditText
         android:id="@+id/passwordET"
