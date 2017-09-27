@@ -1,11 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.group35.journalapp.CreateJournalActivity"
     tools:showIn="@layout/app_bar_create_journal">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/changeImageTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imagePreviewIV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:text="Tap the icon to change the image" />
+
+    <ImageView
+        android:id="@+id/imagePreviewIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+    <TextView
+        android:id="@+id/journalTitleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/changeImageTV"
+        android:text="Journal Title:" />
+
+    <EditText
+        android:id="@+id/journalTitleET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/journalTitleTV"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="Journal Title" />
+
+    <TextView
+        android:id="@+id/journalDescriptionTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/journalTitleET"
+        android:text="Journal Description:" />
+
+    <EditText
+        android:id="@+id/journalDescriptionET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/journalDescriptionTV"
+        android:ems="10"
+        android:hint="Journal Description" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/backBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/saveJournalBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:text="Save Journal" />
+    </LinearLayout>
+</RelativeLayout>

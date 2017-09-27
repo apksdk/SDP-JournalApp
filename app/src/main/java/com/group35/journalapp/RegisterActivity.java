@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,12 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
-
     /**
      * Register account.
      */
@@ -74,10 +69,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 String uID = currentUser.getUid();
 
-                                User user = new User(usernameET.getText().toString(), emailET.getText().toString(), "");
-                                ref.child(uID).setValue(user);
+                                User user = new User(uID, emailET.getText().toString(), "");
+                                ref.child(usernameET.getText().toString()).setValue(user);
 
-                                Toast.makeText(getBaseContext(), "You have successfully register & now logged in.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_SHORT).show();
 
                                 startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
                                 finish();

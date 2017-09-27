@@ -1,10 +1,10 @@
-package com.group35.journalapp;
+package com.group35.journalapp.models;
 
 /**
  * Created by Joshua on 9/24/2017.
  */
 public class User {
-    private String mUsername;
+    private String mUserID;
     private String mEmail;
     private String mProfileImageLink;
 
@@ -18,12 +18,12 @@ public class User {
     /**
      * Instantiates a new User.
      *
-     * @param username    the username
+     * @param userID    the username
      * @param email       the email
      * @param profileLink the profile link
      */
-    public User(String username, String email ,String profileLink) {
-        mUsername = username;
+    public User(String userID, String email ,String profileLink) {
+        mUserID = userID;
         mEmail = email;
         mProfileImageLink = profileLink;
     }
@@ -35,7 +35,7 @@ public class User {
      * @return the username
      */
     public String getUsername() {
-        return mUsername;
+        return mUserID;
     }
 
     /**
@@ -44,7 +44,7 @@ public class User {
      * @param mUsername the m username
      */
     public void setUsername(String mUsername) {
-        this.mUsername = mUsername;
+        this.mUserID = mUsername;
     }
 
     /**
