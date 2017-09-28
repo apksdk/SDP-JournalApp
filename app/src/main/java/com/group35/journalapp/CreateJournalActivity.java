@@ -1,20 +1,38 @@
 package com.group35.journalapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.group35.journalapp.models.Journal;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CreateJournalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.imagePreviewIV)
+    ImageView imagePreviewIV;
+
+    @BindView(R.id.journalTitleET)
+    EditText journalTitleET;
+
+    @BindView(R.id.journalDescriptionET)
+    EditText journalDescriptionET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +41,7 @@ public class CreateJournalActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,7 +91,7 @@ public class CreateJournalActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_view_journals) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -97,5 +108,22 @@ public class CreateJournalActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick(R.id.backBTN)
+    public void backHandler(View view) {
+        if (TextUtils.isEmpty(journalDescriptionET.getText().toString()) && TextUtils.isEmpty(journalTitleET.getText().toString())) {
+            finish();
+        } else {
+            //Ask to confirm leave
+        }
+    }
+
+    @OnClick(R.id.saveJournalBTN)
+    public void saveHandler(View view) {
+        String journalTitle = journalTitleET.getText().toString();
+        String journalDescription = journalDescriptionET.getText().toString();
+        Journal journal = new Journal(journalTitle, journalDescription);
+        //Save the journal
     }
 }
