@@ -15,8 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
+import com.group35.journalapp.models.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,7 @@ import butterknife.OnClick;
 
 public class CreateJournalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @BindView(R.id.imagePreviewIV)
     ImageView imagePreviewIV;
@@ -124,6 +130,22 @@ public class CreateJournalActivity extends AppCompatActivity
         String journalTitle = journalTitleET.getText().toString();
         String journalDescription = journalDescriptionET.getText().toString();
         Journal journal = new Journal(journalTitle, journalDescription);
+        DatabaseReference journalDatabase = FirebaseDatabase.getInstance().getReference("journals");
+
         //Save the journal
+     if(journalTitle.matches("")){
+         journalDatabase.child().setValue(journal);
+         Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
+
+     }
+     else{
+         Toast.makeText(getBaseContext(), "Please enter in a journal title to proceed.", Toast.LENGTH_SHORT).show();
+     }
+
+
+
+
+
+
     }
 }
