@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -134,9 +135,10 @@ public class CreateJournalActivity extends AppCompatActivity
 
         //Save the journal
      if(journalTitle.matches("")){
-         journalDatabase.child().setValue(journal);
+         //journalDatabase.child().setValue(journal);
          Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
-
+         startActivity(new Intent(getBaseContext(), ViewEntryActivity.class));
+         finish();
      }
      else{
          Toast.makeText(getBaseContext(), "Please enter in a journal title to proceed.", Toast.LENGTH_SHORT).show();
