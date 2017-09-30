@@ -71,7 +71,6 @@
             android:layout_below="@+id/textView20"
             android:layout_marginTop="45dp"
             android:text="Addition Comments:" />
-
     </RelativeLayout>
 
 </LinearLayout>
