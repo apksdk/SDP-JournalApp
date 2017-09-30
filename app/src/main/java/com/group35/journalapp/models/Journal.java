@@ -10,11 +10,19 @@ public class Journal {
     private String mJournalName;
     private String mJournalDescription;
     private ArrayList<JournalEntry> mJournalEntries;
+    private String mJournalModifiedDate;
+    private String mJournalImageLink;
 
-    public Journal (String journalName, String journalDescription) {
+    public Journal() {
+
+    }
+
+    public Journal (String journalName, String journalDescription, String journalImage) {
         mJournalName = journalName;
         mJournalDescription = journalDescription;
+        mJournalImageLink = journalImage;
         mJournalEntries = new ArrayList<JournalEntry>();
+        mJournalModifiedDate = "04/12/1991";
     }
 
     public String getJournalName() {
@@ -39,5 +47,21 @@ public class Journal {
 
     public void setJournalDescription(String journalDescription) {
         this.mJournalDescription = journalDescription;
+    }
+
+    public String getJournalModifiedDate() {
+        return mJournalModifiedDate;
+    }
+
+    public void setJournalModifiedDate(String mJournalDate) {
+        this.mJournalModifiedDate = mJournalDate;
+    }
+
+    public String getJournalImageLink() {
+        return mJournalImageLink;
+    }
+
+    public void setJournalImageLink(String mJournalImageLink) {
+        this.mJournalImageLink = mJournalImageLink;
     }
 }

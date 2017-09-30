@@ -1,14 +1,11 @@
 package com.group35.journalapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -18,11 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
-import com.group35.journalapp.models.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +28,9 @@ import butterknife.OnClick;
 public class CreateJournalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
 
     @BindView(R.id.imagePreviewIV)
     ImageView imagePreviewIV;
@@ -130,24 +130,16 @@ public class CreateJournalActivity extends AppCompatActivity
     public void saveHandler(View view) {
         String journalTitle = journalTitleET.getText().toString();
         String journalDescription = journalDescriptionET.getText().toString();
-        Journal journal = new Journal(journalTitle, journalDescription);
-        DatabaseReference journalDatabase = FirebaseDatabase.getInstance().getReference("journals");
+        Journal journal = new Journal(journalTitle, journalDescription, "");
+        DatabaseReference journalRef = mDatabase.getReference();
 
         //Save the journal
-     if(journalTitle.matches("")){
-         //journalDatabase.child().setValue(journal);
-         Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
-         startActivity(new Intent(getBaseContext(), ViewEntryActivity.class));
-         finish();
-     }
-     else{
-         Toast.makeText(getBaseContext(), "Please enter in a journal title to proceed.", Toast.LENGTH_SHORT).show();
-     }
-
-
-
-
-
-
+        if (!journalTitle.isEmpty()) {
+            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal);
+            Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            journalTitleET.setError("Missing Journal Title!");
+        }
     }
 }

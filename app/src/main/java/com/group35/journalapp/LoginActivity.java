@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Attempting to sign in...");
+        progressDialog.setMessage(getString(R.string.sign_in_message));
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null && !user.isAnonymous()) {

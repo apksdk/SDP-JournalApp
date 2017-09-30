@@ -11,4 +11,10 @@
     <string name="title_activity_view_entry">View Entry</string>
     <string name="title_activity_create_entry">Create A New Entry</string>
     <string name="title_activity_entry_history">Entry History</string>
+
+    <!--For Login Activity-->
+    <string name="sign_in_message">Attempting to sign in...</string>
+
+    <!--For Register Activity-->
+
 </resources>
