@@ -22,4 +22,11 @@
 
     <include layout="@layout/content_create_journal" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="127dp"
+        android:layout_height="43dp"
+        android:layout_weight="1"
+        android:text="Create Journal" />
+
 </android.support.design.widget.CoordinatorLayout>
