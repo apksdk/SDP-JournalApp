@@ -20,7 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_view_journals" />
+    <include layout="@layout/content_view_journals"
+        android:layout_width="wrap_content"
+        android:id="@+id/include" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
