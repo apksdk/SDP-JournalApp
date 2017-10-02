@@ -5,8 +5,9 @@ package com.group35.journalapp.models;
  */
 
 public class EntryContent {
-    private String mEntryTitle;
     private String mEntryID;
+    private String mEntryAuthor;
+    private String mEntryTitle;
     private int mEntryVersion;
     private String mEntryNotes;
     private String mEntryObligations;
@@ -19,20 +20,28 @@ public class EntryContent {
 
     //Create model constructor
 
-    public String getEntryTitle() {
-        return mEntryTitle;
-    }
-
-    public void setEntryTitle(String mEntryTitle) {
-        this.mEntryTitle = mEntryTitle;
-    }
-
     public String getEntryID() {
         return mEntryID;
     }
 
     public void setEntryID(String mEntryID) {
         this.mEntryID = mEntryID;
+    }
+
+    public String getEntryAuthor() {
+        return mEntryAuthor;
+    }
+
+    public void setEntryAuthor(String mEntryAuthor) {
+        this.mEntryAuthor = mEntryAuthor;
+    }
+
+    public String getEntryTitle() {
+        return mEntryTitle;
+    }
+
+    public void setEntryTitle(String mEntryTitle) {
+        this.mEntryTitle = mEntryTitle;
     }
 
     public int getEntryVersion() {
