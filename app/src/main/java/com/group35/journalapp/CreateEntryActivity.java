@@ -12,9 +12,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class CreateEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.entryTitleET)
+    EditText entryTitleET;
+
+    @BindView(R.id.entryNotesET)
+    EditText entryNotesET;
+
+    @BindView(R.id.entryObligationsET)
+    EditText entryObligationsET;
+
+    @BindView(R.id.entryDecisionsET)
+    EditText entryDecisionsET;
+
+    @BindView(R.id.entryOutcomesET)
+    EditText entryOutcomesET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,5 +117,22 @@ public class CreateEntryActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick(R.id.saveEntryBTN)
+    public void saveHandler(View view) {
+        String entryTitle = entryTitleET.getText().toString();
+        String entryAuthor = "saveHandler Author";
+        String entryNotes = entryNotesET.getText().toString();
+        String entryObligations = entryObligationsET.getText().toString();
+        String entryDecisions = entryDecisionsET.getText().toString();
+        String entryOutcomes = entryOutcomesET.getText().toString();
+
+        // Get all information
+        if (!entryTitle.isEmpty()) {
+        //Save
+        } else {
+            entryTitleET.setError("Missing Entry Title!");
+        }
     }
 }
