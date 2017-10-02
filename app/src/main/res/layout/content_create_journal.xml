@@ -23,9 +23,9 @@
         android:id="@+id/imagePreviewIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/journalTitleTV"

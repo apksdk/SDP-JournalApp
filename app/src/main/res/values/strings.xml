@@ -17,4 +17,24 @@
 
     <!--For Register Activity-->
 
+
+    <!--For changing colours-->
+    <string-array name = "coloursSelect">
+        <item>white</item>
+        <item>yellow</item>
+        <item>fuchsia</item>
+        <item>red</item>
+        <item>silver</item>
+        <item>gray</item>
+        <item>olive</item>
+        <item>purple</item>
+        <item>maroon</item>
+        <item>aqua</item>
+        <item>lime</item>
+        <item>teal</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>navy</item>
+        <item>black</item>
+    </string-array>
 </resources>

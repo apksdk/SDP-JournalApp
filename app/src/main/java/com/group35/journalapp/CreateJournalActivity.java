@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +32,7 @@ public class CreateJournalActivity extends AppCompatActivity
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser = mAuth.getCurrentUser();
+    Context mContext;
 
     @BindView(R.id.imagePreviewIV)
     ImageView imagePreviewIV;
@@ -142,4 +144,10 @@ public class CreateJournalActivity extends AppCompatActivity
             journalTitleET.setError("Missing Journal Title!");
         }
     }
+
+    @OnClick(R.id.imagePreviewIV)
+    public void imageSelector(View view){
+        
+    }
+
 }
