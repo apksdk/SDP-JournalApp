@@ -154,7 +154,6 @@ public class CreateJournalActivity extends AppCompatActivity
 
     @OnClick(R.id.imagePreviewIV)
     public void imageSelector(View view) {
-
         Spinner spinner = (Spinner) findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.coloursSelect, android.R.layout.simple_spinner_item);
@@ -163,10 +162,12 @@ public class CreateJournalActivity extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Context context;
+                //String colours[] = context.getResources().getStringArray(R.array.coloursSelect);
                 //skeleton code
                 switch(position) {
                     case 0:
-
+                       // view.setBackgroundColor(colours[0]);
                         break;
                     case 1:
 
