@@ -123,6 +123,5 @@ public class ViewEntryActivity extends AppCompatActivity
         */
         Toast.makeText(getBaseContext(), "You have successfully created a journal entry.", Toast.LENGTH_SHORT).show();
         finish();
-
     }
 }
