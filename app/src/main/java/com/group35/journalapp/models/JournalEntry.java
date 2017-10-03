@@ -7,6 +7,8 @@ import java.util.Date;
  * Created by Joshua on 9/27/2017.
  */
 public class JournalEntry {
+    private String mJournalEntryID;
+    private String mJournalEntryAuthor;
     private String mJournalEntryTitle;
     private String mJournalEntryDescription;
     private Date mJournalLastModifyDate;
@@ -39,6 +41,21 @@ public class JournalEntry {
         mJournalEntryDeleted = false;
         mEntryContentList = new ArrayList<EntryContent>();
     }
+
+    public String getJournalEntryID() { return mJournalEntryID; }
+
+    public void setJournalEntryID(String mJournalEntryID) {
+        this.mJournalEntryID = mJournalEntryID;
+    }
+
+    public String getJournalEntryAuthor() { return mJournalEntryAuthor; }
+
+    public void setJournalEntryAuthor(String mJournalEntryAuthor) {
+        this.mJournalEntryAuthor = mJournalEntryAuthor;
+    }
+
+    //EntryID is different to JournalID as entryID is used to find previous versions of the same entry.
+    //Author is passed from JournalAuthor.
 
     public String getJournalEntryTitle() {
         return mJournalEntryTitle;

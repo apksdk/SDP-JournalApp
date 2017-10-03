@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 
 public class Journal {
+    private String mJournalID;
+    private String mJournalAuthor;
     private String mJournalName;
     private String mJournalDescription;
     private ArrayList<JournalEntry> mJournalEntries;
@@ -24,6 +26,25 @@ public class Journal {
         mJournalEntries = new ArrayList<JournalEntry>();
         mJournalModifiedDate = "04/12/1991";
     }
+
+    public String getJournalID() {
+        return mJournalID;
+    }
+
+    public void setJournalID(String journalID) {
+        this.mJournalID = journalID;
+    }
+
+    public String getJournalAuthor() {
+        return mJournalAuthor;
+    }
+
+    public void setJournalAuthor(String journalAuthor) {
+        this.mJournalAuthor = journalAuthor;
+    }
+
+    // Author is consistent throughout the Create Journal and Create Entry Process.
+    // ID used to identify entries that are contained within each Journal.
 
     public String getJournalName() {
         return mJournalName;
