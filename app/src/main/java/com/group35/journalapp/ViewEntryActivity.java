@@ -111,7 +111,7 @@ public class ViewEntryActivity extends AppCompatActivity
     }
 
     //@onClick(R.id."WhateverTheHellWeCallTheButton")
-    public void saveButton(){
+    public void saveButton() {
 
         EntryContent entryContent = new EntryContent();
         DatabaseReference entryRef = mDatabase.getReference();
@@ -123,6 +123,6 @@ public class ViewEntryActivity extends AppCompatActivity
         */
         Toast.makeText(getBaseContext(), "You have successfully created a journal entry.", Toast.LENGTH_SHORT).show();
         finish();
+
     }
-    
 }
