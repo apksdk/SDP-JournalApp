@@ -15,11 +15,22 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.EntryContent;
+import com.group35.journalapp.models.Journal;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CreateEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
 
     @BindView(R.id.entryTitleET)
     EditText entryTitleET;
@@ -128,8 +139,11 @@ public class CreateEntryActivity extends AppCompatActivity
         String entryDecisions = entryDecisionsET.getText().toString();
         String entryOutcomes = entryOutcomesET.getText().toString();
 
+        EntryContent entryContent = new EntryContent(entryTitle, entryNotes, entryObligations, entryDecisions, entryOutcomes);
+        DatabaseReference entryRef = mDatabase.getReference();
         // Get all information
         if (!entryTitle.isEmpty()) {
+            entryRef.child("users").child(mUser.getDisplayName()).child("Journals").child("Entries").child("EntryContents").push().setValue(entryContent);
         //Save
         } else {
             entryTitleET.setError("Missing Entry Title!");

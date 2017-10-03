@@ -8,13 +8,21 @@ public class EntryContent {
     private String mEntryID;
     private String mEntryAuthor;
     private String mEntryTitle;
-    private int mEntryVersion;
     private String mEntryNotes;
     private String mEntryObligations;
     private String mEntryDecisions;
     private String mEntryOutcomes;
+    private int mEntryVersion;
+    private String mEntryModifiedDate;
 
-    public EntryContent() {
+    public EntryContent(String entryTitle, String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes) {
+        mEntryTitle = entryTitle;
+        mEntryNotes = entryNotes;
+        mEntryObligations = entryObligations;
+        mEntryDecisions = entryDecisions;
+        mEntryOutcomes = entryOutcomes;
+        mEntryModifiedDate = "04/12/1991";
+        //Any significance of that date?
 
     }
 
