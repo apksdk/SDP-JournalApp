@@ -130,7 +130,7 @@ public class CreateEntryActivity extends AppCompatActivity
         return true;
     }
 
-    @OnClick(R.id.saveEntryBTN)
+    @OnClick(R.id.confirmBTN)
     public void saveHandler(View view) {
         String entryTitle = entryTitleET.getText().toString();
         String entryAuthor = "saveHandler Author";
