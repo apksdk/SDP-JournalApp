@@ -10,48 +10,8 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="-57dp" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="-57dp"
-        tools:text="Creat new entry" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="-57dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create new entry"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="16dp" />
-
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/addMediaIBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
@@ -59,15 +19,15 @@
         tools:layout_editor_absoluteY="40dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/addMediaTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tap to add a medias"
+        android:text="Tap to add a media"
         tools:layout_editor_absoluteX="129dp"
         tools:layout_editor_absoluteY="108dp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/entryTitleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entry name"
@@ -75,17 +35,17 @@
         tools:layout_editor_absoluteY="125dp" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/entryTitleET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter the entry name"
+        android:hint="Enter the entry name"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="142dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/entryObligationsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Obligations"
@@ -93,17 +53,17 @@
         tools:layout_editor_absoluteY="185dp" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/entryObligationsET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter the details here..."
+        android:hint="Enter the details here..."
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="202dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/entryDecisionsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Decisions"
@@ -111,17 +71,17 @@
         tools:layout_editor_absoluteY="246dp" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/entryDecisionsET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter your decisions here..."
+        android:hint="Enter your decisions here..."
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="263dp" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/entryOutcomesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Outcomes"
@@ -129,17 +89,17 @@
         tools:layout_editor_absoluteY="306dp" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/entryOutcomesET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter your decisions here..."
+        android:hint="Enter your decisions here..."
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="323dp" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/entryNotesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Additional comments"
@@ -147,17 +107,17 @@
         tools:layout_editor_absoluteY="366dp" />
 
     <EditText
-        android:id="@+id/editText9"
+        android:id="@+id/entryNotesET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter your comments here..."
+        android:hint="Enter your comments here..."
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="383dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/cancelBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
@@ -165,7 +125,7 @@
         tools:layout_editor_absoluteY="444dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/confirmBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm"

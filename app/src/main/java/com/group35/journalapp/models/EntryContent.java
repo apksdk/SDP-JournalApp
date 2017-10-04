@@ -26,14 +26,6 @@ public class EntryContent {
 
     }
 
-    public EntryContent(String entryTitle, String obligations, String decisions, String outcomes,String notes){
-        entryTitle = mEntryTitle;
-        obligations = mEntryObligations;
-        decisions = mEntryDecisions;
-        outcomes = mEntryOutcomes;
-        notes = mEntryNotes;
-    }
-
     //Create model constructor
 
     public String getEntryID() {
