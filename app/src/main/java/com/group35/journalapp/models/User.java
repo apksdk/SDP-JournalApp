@@ -1,5 +1,8 @@
 package com.group35.journalapp.models;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by Joshua on 9/24/2017.
  */
@@ -7,6 +10,7 @@ public class User {
     private String mUserID;
     private String mEmail;
     private String mProfileImageLink;
+    private ArrayList<Journal> mJournals;
 
     /**
      * Instantiates a new User. Firebase requires this so do not remove.
@@ -22,10 +26,11 @@ public class User {
      * @param email       the email
      * @param profileLink the profile link
      */
-    public User(String userID, String email ,String profileLink) {
+    public User(String userID, String email, String profileLink) {
         mUserID = userID;
         mEmail = email;
         mProfileImageLink = profileLink;
+        mJournals = new ArrayList<Journal>();
     }
 
 
@@ -81,5 +86,13 @@ public class User {
      */
     public void setEmail(String email) {
         mEmail = email;
+    }
+
+    public ArrayList<Journal> getJournals() {
+        return mJournals;
+    }
+
+    public void setJournals(ArrayList<Journal> mJournals) {
+        this.mJournals = mJournals;
     }
 }

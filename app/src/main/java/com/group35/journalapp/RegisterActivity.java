@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.User;
@@ -64,18 +65,28 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(usernameET.getText().toString())
+                                        .build();
+                                mAuth.getCurrentUser().updateProfile(profileChangeRequest);
+
                                 DatabaseReference ref = mDatabase.getReference().child("users");
 
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 String uID = currentUser.getUid();
 
                                 User user = new User(uID, emailET.getText().toString(), "");
-                                ref.child(usernameET.getText().toString()).setValue(user);
+                                ref.child(usernameET.getText().toString()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+                                            Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_SHORT).show();
-
-                                startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
-                                finish();
+                                            startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
+                                            finish();
+                                        }
+                                    }
+                                });
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Registration failed, please try again.", Toast.LENGTH_SHORT).show();
                             }

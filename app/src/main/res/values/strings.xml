@@ -11,4 +11,30 @@
     <string name="title_activity_view_entry">View Entry</string>
     <string name="title_activity_create_entry">Create A New Entry</string>
     <string name="title_activity_entry_history">Entry History</string>
+
+    <!--For Login Activity-->
+    <string name="sign_in_message">Attempting to sign in...</string>
+
+    <!--For Register Activity-->
+
+
+    <!--For changing colours-->
+    <string-array name = "coloursSelect">
+        <item>white</item>
+        <item>yellow</item>
+        <item>fuchsia</item>
+        <item>red</item>
+        <item>silver</item>
+        <item>gray</item>
+        <item>olive</item>
+        <item>purple</item>
+        <item>maroon</item>
+        <item>aqua</item>
+        <item>lime</item>
+        <item>teal</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>navy</item>
+        <item>black</item>
+    </string-array>
 </resources>
