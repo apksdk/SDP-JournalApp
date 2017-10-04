@@ -31,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
 
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
