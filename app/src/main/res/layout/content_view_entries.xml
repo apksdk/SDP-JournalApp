@@ -1,115 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.group35.journalapp.ViewEntriesActivity"
     tools:showIn="@layout/app_bar_view_entries">
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="111dp" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="208dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entry Title "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8/27/2017 4:12PM"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="52dp" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entry Title "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="118dp" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8/26/2017 4:12PM"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="118dp" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="150dp" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entry Title "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="215dp" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8/25/2017 4:12PM"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="208dp" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, "
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="248dp" />
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/viewEntriesRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

@@ -35,12 +35,13 @@ public class JournalHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.journalsLayout)
     RelativeLayout mJournalsLayout;
 
-    private Context context;
+    private Context mContext;
+    private String mJournalID;
 
     public JournalHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        context = itemView.getContext();
+        mContext = itemView.getContext();
     }
 
     public ImageView getJournalPreviewIV() {
@@ -86,6 +87,16 @@ public class JournalHolder extends RecyclerView.ViewHolder {
     @OnClick(R.id.journalsLayout)
     public void journalClickHandler(View view) {
         //Pass some info here as intent
-        context.startActivity(new Intent(context, ViewEntriesActivity.class));
+        Intent intent = new Intent(mContext, ViewEntriesActivity.class);
+        intent.putExtra("journalID", "");
+        mContext.startActivity(intent);
+    }
+
+    public String getJournalID() {
+        return mJournalID;
+    }
+
+    public void setJournalID(String journalID) {
+        this.mJournalID = journalID;
     }
 }

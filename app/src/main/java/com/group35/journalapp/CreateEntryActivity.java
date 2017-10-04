@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,21 +48,15 @@ public class CreateEntryActivity extends AppCompatActivity
     @BindView(R.id.entryOutcomesET)
     EditText entryOutcomesET;
 
+    @BindView(R.id.addMediaIBTN)
+    ImageButton addMediaIBTN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,8 +127,9 @@ public class CreateEntryActivity extends AppCompatActivity
 
     @OnClick(R.id.confirmBTN)
     public void saveHandler(View view) {
+        // Get all information
         String entryTitle = entryTitleET.getText().toString();
-        String entryAuthor = "saveHandler Author";
+        String entryAuthor = mUser.getDisplayName();
         String entryNotes = entryNotesET.getText().toString();
         String entryObligations = entryObligationsET.getText().toString();
         String entryDecisions = entryDecisionsET.getText().toString();
@@ -141,9 +137,9 @@ public class CreateEntryActivity extends AppCompatActivity
 
         EntryContent entryContent = new EntryContent(entryTitle, entryNotes, entryObligations, entryDecisions, entryOutcomes);
         DatabaseReference entryRef = mDatabase.getReference();
-        // Get all information
+        // Save entry to database
         if (!entryTitle.isEmpty()) {
-            entryRef.child("users").child(mUser.getDisplayName()).child("Journals").child("Entries").child("EntryContents").push().setValue(entryContent);
+            entryRef.child("users").child(mUser.getDisplayName()).child("Journals").child("ID HERE").child("Entries").child("EntryContents").push().setValue(entryContent);
         //Save
         } else {
             entryTitleET.setError("Missing Entry Title!");
