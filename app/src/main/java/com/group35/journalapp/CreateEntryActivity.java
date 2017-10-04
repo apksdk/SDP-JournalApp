@@ -13,13 +13,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.EntryContent;
+import com.group35.journalapp.models.Journal;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CreateEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
 
     @BindView(R.id.entryTitleET)
     EditText entryTitleET;
@@ -36,21 +48,15 @@ public class CreateEntryActivity extends AppCompatActivity
     @BindView(R.id.entryOutcomesET)
     EditText entryOutcomesET;
 
+    @BindView(R.id.addMediaIBTN)
+    ImageButton addMediaIBTN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -119,17 +125,21 @@ public class CreateEntryActivity extends AppCompatActivity
         return true;
     }
 
-    @OnClick(R.id.saveEntryBTN)
+    @OnClick(R.id.confirmBTN)
     public void saveHandler(View view) {
+        // Get all information
         String entryTitle = entryTitleET.getText().toString();
-        String entryAuthor = "saveHandler Author";
+        String entryAuthor = mUser.getDisplayName();
         String entryNotes = entryNotesET.getText().toString();
         String entryObligations = entryObligationsET.getText().toString();
         String entryDecisions = entryDecisionsET.getText().toString();
         String entryOutcomes = entryOutcomesET.getText().toString();
 
-        // Get all information
+        EntryContent entryContent = new EntryContent(entryTitle, entryNotes, entryObligations, entryDecisions, entryOutcomes);
+        DatabaseReference entryRef = mDatabase.getReference();
+        // Save entry to database
         if (!entryTitle.isEmpty()) {
+            entryRef.child("users").child(mUser.getDisplayName()).child("Journals").child("ID HERE").child("Entries").child("EntryContents").push().setValue(entryContent);
         //Save
         } else {
             entryTitleET.setError("Missing Entry Title!");
