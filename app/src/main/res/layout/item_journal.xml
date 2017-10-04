@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:id="@+id/journalsLayout"
     android:layout_height="match_parent">
 
     <TextView
@@ -25,14 +26,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/journalTitleTV"
         android:layout_toRightOf="@+id/journalPreviewIV"
-        android:text="5 Recorded Entries" />
+        android:text="0 Recorded Entries" />
 
     <TextView
         android:id="@+id/journalTitleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Journal #1"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/journalPreviewIV"
-        android:text="Journal #1" />
+        android:layout_toEndOf="@+id/journalPreviewIV" />
 
     <ImageView
         android:id="@+id/journalPreviewIV"
