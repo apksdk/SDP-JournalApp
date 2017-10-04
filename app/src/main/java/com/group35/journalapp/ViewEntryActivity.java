@@ -12,9 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.EntryContent;
+
 
 public class ViewEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,5 +108,20 @@ public class ViewEntryActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //@onClick(R.id."WhateverTheHellWeCallTheButton")
+    public void saveButton() {
+
+        EntryContent entryContent = new EntryContent();
+        DatabaseReference entryRef = mDatabase.getReference();
+        /*
+        entryRef.child("users").child.("Journals").push().setValue(entryContent.setEntryTitle(entryNameTxtBox.getText.toString()));
+        entryRef.child("users").child.("Journals").push().setValue(entryContent.setEntryObligations(obligationsTxtBox.getText().toString()));
+        entryRef.child("users").child.("Journals").push().setValue(entryContent.getEntryOutcomes(outcomesTxtBox.getText().toString()));
+        entryRef.child("users").child.("Journals").push().setValue(entryContent.getEntryNotes(commentsTxtBox.getText().toString()));
+        */
+        Toast.makeText(getBaseContext(), "You have successfully created a journal entry.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
