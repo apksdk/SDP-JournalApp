@@ -23,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entry name"
-        tools:layout_editor_absoluteY="125dp"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="125dp" />
 
     <EditText
         android:id="@+id/entryTitleET"
@@ -34,16 +35,20 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Enter the entry name"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="142dp" />
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryTitleTV" />
 
     <TextView
         android:id="@+id/entryObligationsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Obligations"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="185dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryTitleET"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/entryObligationsET"
