@@ -15,8 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tap to add a media"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="108dp" />
+        tools:layout_editor_absoluteX="132dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <TextView
         android:id="@+id/entryTitleTV"
@@ -58,7 +59,8 @@
         android:inputType="textPersonName"
         android:hint="Enter the details here..."
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="202dp" />
+        android:layout_marginTop="2dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryObligationsTV" />
 
     <TextView
         android:id="@+id/entryDecisionsTV"
@@ -66,7 +68,8 @@
         android:layout_height="wrap_content"
         android:text="Decisions"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="246dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryObligationsET" />
 
     <EditText
         android:id="@+id/entryDecisionsET"
@@ -76,7 +79,8 @@
         android:inputType="textPersonName"
         android:hint="Enter your decisions here..."
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="263dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryDecisionsTV" />
 
     <TextView
         android:id="@+id/entryOutcomesTV"
@@ -84,7 +88,8 @@
         android:layout_height="wrap_content"
         android:text="Outcomes"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="306dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryDecisionsET" />
 
     <EditText
         android:id="@+id/entryOutcomesET"
@@ -94,7 +99,8 @@
         android:inputType="textPersonName"
         android:hint="Enter your decisions here..."
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="323dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryOutcomesTV" />
 
     <TextView
         android:id="@+id/entryNotesTV"
@@ -102,7 +108,8 @@
         android:layout_height="wrap_content"
         android:text="Additional comments"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="366dp" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryOutcomesET" />
 
     <EditText
         android:id="@+id/entryNotesET"
@@ -112,7 +119,8 @@
         android:inputType="textPersonName"
         android:hint="Enter your comments here..."
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="383dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryNotesTV" />
 
     <Button
         android:id="@+id/cancelBTN"
@@ -120,7 +128,8 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="444dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="19dp" />
 
     <Button
         android:id="@+id/confirmBTN"
@@ -128,7 +137,8 @@
         android:layout_height="wrap_content"
         android:text="Confirm"
         tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="444dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="19dp" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -136,5 +146,6 @@
         android:layout_height="98dp"
         app:srcCompat="@drawable/icon"
         tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="10dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp" />
 </android.support.constraint.ConstraintLayout>
