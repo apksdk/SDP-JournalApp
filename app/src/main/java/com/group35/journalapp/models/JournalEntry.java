@@ -24,7 +24,7 @@ public class JournalEntry {
 
     }
 
-    /**
+    /**\
      * Instantiates a new Journal entry.
      *
      * @param entryTitle       the entry title
