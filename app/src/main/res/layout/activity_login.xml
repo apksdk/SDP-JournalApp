@@ -8,24 +8,15 @@
     tools:context="com.group35.journalapp.LoginActivity">
 
 
-    <ImageView
-        android:id="@+id/logoIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
-        android:contentDescription="Image Logo"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
-
     <TextView
         android:id="@+id/logoTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logoIV"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:text="Journal App"
-        android:textSize="20sp" />
+        android:layout_marginTop="167dp"
+        android:text="NotePro"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/usernameET"
@@ -36,7 +27,8 @@
         android:inputType="textEmailAddress"
         android:layout_below="@+id/logoTV"
         android:layout_alignLeft="@+id/passwordET"
-        android:layout_alignStart="@+id/passwordET" />
+        android:layout_alignStart="@+id/passwordET"
+        android:layout_marginTop="47dp" />
 
     <EditText
         android:id="@+id/passwordET"
@@ -67,5 +59,14 @@
         android:layout_alignLeft="@+id/loginBTN"
         android:layout_alignStart="@+id/loginBTN"
         android:layout_marginTop="12dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icon"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

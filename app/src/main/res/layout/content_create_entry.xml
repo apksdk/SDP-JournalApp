@@ -10,14 +10,6 @@
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
-    <ImageButton
-        android:id="@+id/addMediaIBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="40dp" />
-
     <TextView
         android:id="@+id/addMediaTV"
         android:layout_width="wrap_content"
@@ -31,8 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entry name"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="125dp" />
+        tools:layout_editor_absoluteY="125dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/entryTitleET"
@@ -131,4 +124,12 @@
         android:text="Confirm"
         tools:layout_editor_absoluteX="239dp"
         tools:layout_editor_absoluteY="444dp" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="115dp"
+        android:layout_height="98dp"
+        app:srcCompat="@drawable/icon"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="10dp" />
 </android.support.constraint.ConstraintLayout>
