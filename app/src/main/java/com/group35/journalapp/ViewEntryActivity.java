@@ -115,7 +115,7 @@ public class ViewEntryActivity extends AppCompatActivity
     //@onClick(R.id."WhateverTheHellWeCallTheButton")
     public void saveButton() {
 
-        EntryContent entryContent = new EntryContent();
+        //EntryContent entryContent = new EntryContent();
         DatabaseReference entryRef = mDatabase.getReference();
         /*
         entryRef.child("users").child.("Journals").push().setValue(entryContent.setEntryTitle(entryNameTxtBox.getText.toString()));

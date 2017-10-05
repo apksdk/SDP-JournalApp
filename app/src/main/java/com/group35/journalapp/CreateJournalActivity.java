@@ -1,13 +1,17 @@
 package com.group35.journalapp;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,17 +19,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-import android.content.Context;
 import android.widget.Spinner;
-import android.widget.BaseAdapter;
+import android.widget.Toast;
 
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +44,6 @@ public class CreateJournalActivity extends AppCompatActivity
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser = mAuth.getCurrentUser();
-    Context mContext;
 
     @BindView(R.id.imagePreviewIV)
     ImageView imagePreviewIV;
@@ -65,8 +71,6 @@ public class CreateJournalActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
     }
 
     @Override
@@ -131,7 +135,18 @@ public class CreateJournalActivity extends AppCompatActivity
         if (TextUtils.isEmpty(journalDescriptionET.getText().toString()) && TextUtils.isEmpty(journalTitleET.getText().toString())) {
             finish();
         } else {
-            //Ask to confirm leave
+            new AlertDialog.Builder(CreateJournalActivity.this)
+                    .setTitle("Exit Confirmation")
+                    .setMessage("Are you sure you want to exit without saving your changes?")
+                    .setIcon(R.drawable.warning)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
 
@@ -139,14 +154,27 @@ public class CreateJournalActivity extends AppCompatActivity
     public void saveHandler(View view) {
         String journalTitle = journalTitleET.getText().toString();
         String journalDescription = journalDescriptionET.getText().toString();
-        Journal journal = new Journal(journalTitle, journalDescription, "");
+
+        //Get current time
+        String date = new SimpleDateFormat("dd/MM/yyyy hh:mma", Locale.getDefault()).format(new Date());
+        Log.d("Date", date);
+
+        Journal journal = new Journal(journalTitle, journalDescription, "", date);
         DatabaseReference journalRef = mDatabase.getReference();
 
         //Save the journal
         if (!journalTitle.isEmpty()) {
-            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal);
-            Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
-            finish();
+            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()) {
+                        Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(CreateJournalActivity.this, "There was an error while creating your journal. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         } else {
             journalTitleET.setError("Missing Journal Title!");
         }

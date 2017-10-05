@@ -19,12 +19,12 @@ public class Journal {
 
     }
 
-    public Journal (String journalName, String journalDescription, String journalImage) {
+    public Journal (String journalName, String journalDescription, String journalImage, String journalModifiedDate) {
         mJournalName = journalName;
         mJournalDescription = journalDescription;
         mJournalImageLink = journalImage;
         mJournalEntries = new ArrayList<JournalEntry>();
-        mJournalModifiedDate = "04/12/1991";
+        mJournalModifiedDate = journalModifiedDate;
     }
 
     public String getJournalID() {
