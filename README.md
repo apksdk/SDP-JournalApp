@@ -3,8 +3,8 @@ This will allow all developers to see and find tasks to be done.
 This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 
 ### Functional 3/15
-- [ ] Start a New Journal
-- [ ] View a Table of Journal
+- [X] Start a New Journal
+- [X] View a Table of Journal
 - [ ] Delete a Journal
 - [ ] Create a New Entry
 - [ ] View a Table of Entries
@@ -30,12 +30,12 @@ This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 - [ ] Easy to Use
 - [ ] Fast Response Time
 
-### User Interface Screens 0/8
-- [ ] Sign In
-- [ ] Register
-- [ ] View Journals
-- [ ] New Journal
-- [ ] View Entries
-- [ ] New Entry
-- [ ] View Entry Contents
-- [ ] View Entry History
+### User Interface Screens 8/8
+- [X] Sign In
+- [X] Register
+- [X] View Journals
+- [X] New Journal
+- [X] View Entry List
+- [X] New Entry
+- [X] View Entry Contents
+- [X] View Entry History
