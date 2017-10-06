@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.EntryContent;
 import com.group35.journalapp.models.Journal;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -139,7 +141,12 @@ public class CreateEntryActivity extends AppCompatActivity
         DatabaseReference entryRef = mDatabase.getReference();
         // Save entry to database
         if (!entryTitle.isEmpty()) {
-            entryRef.child("users").child(mUser.getDisplayName()).child("Journals").child("ID HERE").child("Entries").child("EntryContents").push().setValue(entryContent);
+            ArrayList<String> entryContentsList = new ArrayList<>();
+            entryContentsList.add(entryRef.push().getKey().toString());
+            String entryID = entryRef.push().getKey().toString();
+
+            entryRef.child("Entry").child(mUser.getDisplayName()).push().child("EntryContents").setValue(entryContentsList.get(0));
+            entryRef.child("EntryContents").child(mUser.getDisplayName()).child(entryID).setValue(entryContentsList.get(0));
         //Save
         } else {
             entryTitleET.setError("Missing Entry Title!");
