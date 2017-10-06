@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +16,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v7.widget.RecyclerView.Adapter;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.EntryContent;
+import com.group35.journalapp.models.Journal;
+
+import butterknife.BindView;
 
 public class ViewEntriesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
+
+    @BindView(R.id.viewJournalsRV)
+    RecyclerView viewEntriesRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +60,33 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        viewEntriesRV.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        viewEntriesRV.addItemDecoration(dividerItemDecoration);
+
+        DatabaseReference entriesRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
+        FirebaseRecyclerAdapter<EntryContent, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<EntryContent, EntryHolder>(
+                Journal.class,
+                R.layout.item_entry,
+                EntryHolder.class,
+                entriesRef) {
+            @Override
+            protected void populateViewHolder(EntryHolder viewHolder, EntryContent model, int position) {
+                Glide.with(ViewEntriesActivity.this).load(model.getJournalImageLink()).into(viewHolder.getJournalPreviewIV());
+                viewHolder.setEntryTitleTV(model.getEntryTitle());
+                viewHolder.setObligationsTV(model.getEntryObligations());
+                viewHolder.setDecisionsTV(model.getEntryDecisions());
+                viewHolder.setOutcomesTV(model.getEntryOutcomes());
+                viewHolder.setCommentsTV(model.getEntryNotes());
+
+
+                if (model.getJournalEntries() != null) {
+                    viewHolder.setRecordedEntriesTV(String.valueOf(model.getJournalEntries().size()));
+                }
+            }
+        };
+        viewEntriesRV.setAdapter(mAdapter);
     }
 
     @Override
