@@ -1,6 +1,7 @@
 package com.group35.journalapp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,8 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +30,7 @@ import com.group35.journalapp.models.Journal;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateEntryActivity extends AppCompatActivity
@@ -50,8 +55,8 @@ public class CreateEntryActivity extends AppCompatActivity
     @BindView(R.id.entryOutcomesET)
     EditText entryOutcomesET;
 
-    @BindView(R.id.addMediaIBTN)
-    ImageButton addMediaIBTN;
+    @BindView(R.id.addMediaIV)
+    ImageView addMediaIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,8 @@ public class CreateEntryActivity extends AppCompatActivity
         setContentView(R.layout.activity_create_entry);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -127,7 +134,7 @@ public class CreateEntryActivity extends AppCompatActivity
         return true;
     }
 
-    @OnClick(R.id.confirmBTN)
+    @OnClick(R.id.entryConfirmBTN)
     public void saveHandler(View view) {
         // Get all information
         String entryTitle = entryTitleET.getText().toString();
@@ -142,12 +149,17 @@ public class CreateEntryActivity extends AppCompatActivity
         // Save entry to database
         if (!entryTitle.isEmpty()) {
             ArrayList<String> entryContentsList = new ArrayList<>();
-            entryContentsList.add(entryRef.push().getKey().toString());
-            String entryID = entryRef.push().getKey().toString();
+            entryContentsList.add(entryRef.push().getKey());
+            String entryID = entryRef.push().getKey();
 
-            entryRef.child("Entry").child(mUser.getDisplayName()).push().child("EntryContents").setValue(entryContentsList.get(0));
-            entryRef.child("EntryContents").child(mUser.getDisplayName()).child(entryID).setValue(entryContentsList.get(0));
-        //Save
+            entryRef.child("Entry").child(mUser.getDisplayName()).child(entryID).child("EntryContents").setValue(entryContentsList.get(0));
+            entryRef.child("EntryContents").child(mUser.getDisplayName()).child(entryID).child(entryContentsList.get(0)).setValue(entryContent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    Toast.makeText(CreateEntryActivity.this, "You have successfully created an entry!", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             entryTitleET.setError("Missing Entry Title!");
         }
