@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.EntryContent;
 import com.group35.journalapp.models.Journal;
+import com.group35.journalapp.models.JournalEntry;
 
 import butterknife.BindView;
 
@@ -66,23 +69,26 @@ public class ViewEntriesActivity extends AppCompatActivity
         viewEntriesRV.addItemDecoration(dividerItemDecoration);
 
         DatabaseReference entriesRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
-        FirebaseRecyclerAdapter<EntryContent, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<EntryContent, EntryHolder>(
-                Journal.class,
-                R.layout.item_entry,
+        FirebaseRecyclerAdapter<EntryContent, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<EntryContent, JournalHolder>(
+                JournalEntry.class,
+                R.layout.item_journal_entry,
                 EntryHolder.class,
                 entriesRef) {
-            @Override
-            protected void populateViewHolder(EntryHolder viewHolder, EntryContent model, int position) {
-                Glide.with(ViewEntriesActivity.this).load(model.getJournalImageLink()).into(viewHolder.getJournalPreviewIV());
-                viewHolder.setEntryTitleTV(model.getEntryTitle());
-                viewHolder.setObligationsTV(model.getEntryObligations());
-                viewHolder.setDecisionsTV(model.getEntryDecisions());
-                viewHolder.setOutcomesTV(model.getEntryOutcomes());
-                viewHolder.setCommentsTV(model.getEntryNotes());
+            //@Override
+            protected void populateViewHolder(EntryHolder entry, JournalEntry model, int position) {
+                String title = entry.getEntryTitleTV().toString();
+                String displayText = entry.getObligationsTV().toString().substring(0,15) + ".....";
 
 
-                if (model.getJournalEntries() != null) {
-                    viewHolder.setRecordedEntriesTV(String.valueOf(model.getJournalEntries().size()));
+                String resource;
+                ViewGroup parent;
+
+                LayoutInflater l = getLayoutInflater();
+                View v = l.inflate(resource, parent);
+
+                if (model.isJournalEntryHidden() == true) {
+
+                    //viewHolder.setRecordedEntriesTV(String.valueOf(model.getJournalEntries().size()));
                 }
             }
         };
