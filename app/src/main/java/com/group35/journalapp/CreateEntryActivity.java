@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -24,10 +25,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.Entry;
 import com.group35.journalapp.models.EntryContent;
 import com.group35.journalapp.models.Journal;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +44,8 @@ public class CreateEntryActivity extends AppCompatActivity
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser = mAuth.getCurrentUser();
+
+    private String mJournalID;
 
     @BindView(R.id.entryTitleET)
     EditText entryTitleET;
@@ -75,6 +82,9 @@ public class CreateEntryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Intent intent = getIntent();
+        mJournalID = intent.getStringExtra("journalID");
     }
 
     @Override
@@ -144,20 +154,25 @@ public class CreateEntryActivity extends AppCompatActivity
         String entryDecisions = entryDecisionsET.getText().toString();
         String entryOutcomes = entryOutcomesET.getText().toString();
 
-        EntryContent entryContent = new EntryContent(entryTitle, entryNotes, entryObligations, entryDecisions, entryOutcomes);
+        //TO DO: GET CURRENT DATE & TIME & REMOVE ENTRY TITLE FROM CONSTRUCTOR
+        String date = new SimpleDateFormat("dd/MM/yyyy hh:mma", Locale.getDefault()).format(new Date());
+
+        Entry entry = new Entry(entryTitle, entryNotes, date, 0);
+        EntryContent entryContent = new EntryContent(entryNotes, entryObligations, entryDecisions, entryOutcomes, date);
         DatabaseReference entryRef = mDatabase.getReference();
         // Save entry to database
         if (!entryTitle.isEmpty()) {
             ArrayList<String> entryContentsList = new ArrayList<>();
             entryContentsList.add(entryRef.push().getKey());
-            String entryID = entryRef.push().getKey();
 
-            entryRef.child("Entry").child(mUser.getDisplayName()).child(entryID).child("EntryContents").setValue(entryContentsList.get(0));
+            entry.setEntryContentList(entryContentsList);
+            String entryID = entryRef.push().getKey();
+            entryRef.child("Entries").child(mUser.getDisplayName()).child(mJournalID).child(entryID).setValue(entry);
             entryRef.child("EntryContents").child(mUser.getDisplayName()).child(entryID).child(entryContentsList.get(0)).setValue(entryContent).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-
                     Toast.makeText(CreateEntryActivity.this, "You have successfully created an entry!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
         } else {

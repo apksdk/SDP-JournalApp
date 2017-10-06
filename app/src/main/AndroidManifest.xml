@@ -34,7 +34,7 @@
             android:label="@string/title_activity_view_entries"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ViewEntryActivity"
+            android:name=".ViewSingleEntryActivity"
             android:label="@string/title_activity_view_entry"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

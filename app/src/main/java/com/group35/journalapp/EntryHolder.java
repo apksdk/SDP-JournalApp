@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -18,30 +16,49 @@ import butterknife.OnClick;
 
 public class EntryHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.EntryTitleTV)
+    @BindView(R.id.lastModifiedTimeTV)
+    TextView mLastModifiedTimeTV;
+
+    @BindView(R.id.entryDescriptionTV)
+    TextView mEntryDescriptionTV;
+
+    @BindView(R.id.entryTitleTV)
     TextView mEntryTitleTV;
 
-    @BindView(R.id.obligationsTV)
-    TextView mObligationsTV;
-
-    @BindView(R.id.decisionsTV)
-    TextView mDecisionsTV;
-
-    @BindView(R.id.outcomesTV)
-    TextView mOutcomesTV;
-
-    @BindView(R.id.commentsTV)
-    TextView mCommentsTV;
-
-    @BindView(R.id.EntriesLayout)
-    RelativeLayout mEntriesLayout;
-
     private Context mContext;
+    private String mEntryID;
+    private String mEntryVersion;
 
     public EntryHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        context = itemView.getContext();
+        mContext = itemView.getContext();
+    }
+
+    @OnClick(R.id.entryLayout)
+    public void entriesClickHandler(View view) {
+        Intent intent = new Intent(mContext, ViewSingleEntryActivity.class);
+        intent.putExtra("entryID", mEntryID);
+        intent.putExtra("entryTitle", mEntryTitleTV.getText().toString());
+        intent.putExtra("entryDescription", mEntryDescriptionTV.getText().toString());
+        intent.putExtra("entryVersion", mEntryVersion);
+        mContext.startActivity(intent);
+    }
+
+    public TextView getLastModifiedTimeTV() {
+        return mLastModifiedTimeTV;
+    }
+
+    public void setLastModifiedTimeTV(String lastModifiedTime) {
+        this.mLastModifiedTimeTV.setText(lastModifiedTime);
+    }
+
+    public TextView getEntryDescriptionTV() {
+        return mEntryDescriptionTV;
+    }
+
+    public void setEntryDescriptionTV(String entryDescription) {
+        this.mEntryDescriptionTV.setText(entryDescription);
     }
 
     public TextView getEntryTitleTV() {
@@ -49,45 +66,18 @@ public class EntryHolder extends RecyclerView.ViewHolder {
     }
 
     public void setEntryTitleTV(String entryTitle) {
-        mEntryTitleTV.setText(entryTitle);
+        this.mEntryTitleTV.setText(entryTitle);
     }
 
-    public TextView getObligationsTV() {
-        return mObligationsTV;
+    public void setEntryID(String mEntryID) {
+        this.mEntryID = mEntryID;
     }
 
-    public void setObligationsTV(String obligations) {
-        mObligationsTV.setText(obligations);
-    }
-    public TextView getDecisionsTV() {
-        return mOutcomesTV;
+    public String getEntryVersion() {
+        return mEntryVersion;
     }
 
-    public void setDecisionsTV(String decisions) {
-        mDecisionsTV.setText(decisions);
-    }
-
-    public TextView getOutcomesTV() {
-        return mOutcomesTV;
-    }
-
-    public void setOutcomesTV(String outcomes) {
-        mOutcomesTV.setText(outcomes);
-    }
-
-    public TextView getCommentsTV() {
-        return mCommentsTV;
-    }
-
-    public void setCommentsTV(String comments) {
-        mCommentsTV.setText(comments);
-    }
-
-
-    @OnClick(R.id.entriesLayout)
-    public void entriesClickHandler(View view) {
-        Intent intent = new Intent(mContext, ViewEntriesActivity.class);
-        intent.putExtra("Entry", "");
-        mContext.startActivity(intent);
+    public void setEntryVersion(String mEntryVersion) {
+        this.mEntryVersion = mEntryVersion;
     }
 }

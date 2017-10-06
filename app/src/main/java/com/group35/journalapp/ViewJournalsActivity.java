@@ -67,7 +67,7 @@ public class ViewJournalsActivity extends AppCompatActivity
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         viewJournalsRV.addItemDecoration(dividerItemDecoration);
 
-        DatabaseReference journalsRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
+        final DatabaseReference journalsRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
         FirebaseRecyclerAdapter<Journal, JournalHolder> mAdapter = new FirebaseRecyclerAdapter<Journal, JournalHolder>(
                 Journal.class,
                 R.layout.item_journal,
@@ -75,11 +75,13 @@ public class ViewJournalsActivity extends AppCompatActivity
                 journalsRef) {
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
-                Glide.with(ViewJournalsActivity.this).load(model.getJournalImageL).into(viewHolder.getJournalPreviewIV());
+                Glide.with(ViewJournalsActivity.this)
+                        .load(model.getJournalImageLink())
+                        .into(viewHolder.getJournalPreviewIV());
                 viewHolder.setJournalTitleTV(model.getJournalName());
                 viewHolder.setDescriptionTV(model.getJournalDescription());
                 viewHolder.setDateTV(model.getJournalModifiedDate());
-
+                viewHolder.setJournalID(getRef(position).getKey());
                 if (model.getJournalEntries() != null) {
                     viewHolder.setRecordedEntriesTV(String.valueOf(model.getJournalEntries().size()));
                 }

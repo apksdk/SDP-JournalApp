@@ -11,7 +11,7 @@ public class Journal {
     private String mJournalAuthor;
     private String mJournalName;
     private String mJournalDescription;
-    private ArrayList<JournalEntry> mJournalEntries;
+    private ArrayList<Entry> mJournalEntries;
     private String mJournalModifiedDate;
     private String mJournalImageLink;
 
@@ -23,7 +23,7 @@ public class Journal {
         mJournalName = journalName;
         mJournalDescription = journalDescription;
         mJournalImageLink = journalImage;
-        mJournalEntries = new ArrayList<JournalEntry>();
+        mJournalEntries = new ArrayList<Entry>();
         mJournalModifiedDate = journalModifiedDate;
     }
 
@@ -54,11 +54,11 @@ public class Journal {
         this.mJournalName = journalName;
     }
 
-    public ArrayList<JournalEntry> getJournalEntries() {
+    public ArrayList<Entry> getJournalEntries() {
         return mJournalEntries;
     }
 
-    public void setJournalEntries(ArrayList<JournalEntry> journalEntries) {
+    public void setJournalEntries(ArrayList<Entry> journalEntries) {
         this.mJournalEntries = journalEntries;
     }
 

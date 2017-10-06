@@ -88,7 +88,7 @@ public class JournalHolder extends RecyclerView.ViewHolder {
     public void journalClickHandler(View view) {
         //Pass some info here as intent
         Intent intent = new Intent(mContext, ViewEntriesActivity.class);
-        intent.putExtra("journalID", "");
+        intent.putExtra("journalID", mJournalID);
         mContext.startActivity(intent);
     }
 
@@ -97,6 +97,6 @@ public class JournalHolder extends RecyclerView.ViewHolder {
     }
 
     public void setJournalID(String journalID) {
-        this.mJournalID = journalID;
+        mJournalID = journalID;
     }
 }

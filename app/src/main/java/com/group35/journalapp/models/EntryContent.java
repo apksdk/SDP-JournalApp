@@ -5,8 +5,6 @@ package com.group35.journalapp.models;
  */
 public class EntryContent {
     private String mEntryID;
-    private String mEntryAuthor;
-    private String mEntryTitle;
     private String mEntryNotes;
     private String mEntryObligations;
     private String mEntryDecisions;
@@ -15,23 +13,27 @@ public class EntryContent {
     private String mEntryModifiedDate;
 
     /**
+     * Instantiates a new Entry content. For Firebase do not delete.
+     */
+    public EntryContent() {
+
+    }
+
+    /**
      * Instantiates a new Entry content.
      *
-     * @param entryTitle       the entry title
      * @param entryNotes       the entry notes
      * @param entryObligations the entry obligations
      * @param entryDecisions   the entry decisions
      * @param entryOutcomes    the entry outcomes
+     * @param date             the entry date
      */
-    public EntryContent(String entryTitle, String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes) {
-        mEntryTitle = entryTitle;
+    public EntryContent(String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes, String date) {
         mEntryNotes = entryNotes;
         mEntryObligations = entryObligations;
         mEntryDecisions = entryDecisions;
         mEntryOutcomes = entryOutcomes;
-        mEntryModifiedDate = "04/12/1991";
-        //Any significance of that date?
-
+        mEntryModifiedDate = date;
     }
 
     /**
@@ -50,42 +52,6 @@ public class EntryContent {
      */
     public void setEntryID(String mEntryID) {
         this.mEntryID = mEntryID;
-    }
-
-    /**
-     * Gets entry author.
-     *
-     * @return the entry author
-     */
-    public String getEntryAuthor() {
-        return mEntryAuthor;
-    }
-
-    /**
-     * Sets entry author.
-     *
-     * @param mEntryAuthor the m entry author
-     */
-    public void setEntryAuthor(String mEntryAuthor) {
-        this.mEntryAuthor = mEntryAuthor;
-    }
-
-    /**
-     * Gets entry title.
-     *
-     * @return the entry title
-     */
-    public String getEntryTitle() {
-        return mEntryTitle;
-    }
-
-    /**
-     * Sets entry title.
-     *
-     * @param mEntryTitle the m entry title
-     */
-    public void setEntryTitle(String mEntryTitle) {
-        this.mEntryTitle = mEntryTitle;
     }
 
     /**
@@ -176,5 +142,23 @@ public class EntryContent {
      */
     public void setEntryOutcomes(String mEntryOutcomes) {
         this.mEntryOutcomes = mEntryOutcomes;
+    }
+
+    /**
+     * Gets entry modified date.
+     *
+     * @return the entry modified date
+     */
+    public String getEntryModifiedDate() {
+        return mEntryModifiedDate;
+    }
+
+    /**
+     * Sets entry modified date.
+     *
+     * @param mEntryModifiedDate the m entry modified date
+     */
+    public void setEntryModifiedDate(String mEntryModifiedDate) {
+        this.mEntryModifiedDate = mEntryModifiedDate;
     }
 }

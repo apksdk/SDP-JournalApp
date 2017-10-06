@@ -1,10 +1,7 @@
 package com.group35.journalapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,21 +10,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.group35.journalapp.models.EntryContent;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class ViewEntryActivity extends AppCompatActivity
+
+public class ViewSingleEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser = mAuth.getCurrentUser();
 
+    private String mEntryID;
+    private String mEntryTitle;
+    private String mEntryDescription;
+    private String mEntryVersion;
+
+    @BindView(R.id.obligationsContentTV)
+    TextView obligationsContentTV;
+
+    @BindView(R.id.outcomeContentTV)
+    TextView outcomeContentTV;
+
+    @BindView(R.id.notesContentTV)
+    TextView notesContentTV;
+
+    @BindView(R.id.decisionsContentTV)
+    TextView decisionsContentTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +55,7 @@ public class ViewEntryActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,6 +65,31 @@ public class ViewEntryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Intent intent = getIntent();
+        mEntryID = intent.getStringExtra("entryID");
+        mEntryTitle = intent.getStringExtra("entryTitle");
+        mEntryDescription = intent.getStringExtra("entryDescription");
+        mEntryVersion = intent.getStringExtra("entryVersion");
+
+        DatabaseReference entryContentRef = mDatabase.getReference().child("EntryContents")
+                .child(mUser.getDisplayName()).child(mEntryID).child(mEntryVersion);
+
+        entryContentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                EntryContent entryContent = dataSnapshot.getValue(EntryContent.class);
+                obligationsContentTV.setText(entryContent.getEntryObligations());
+                outcomeContentTV.setText(entryContent.getEntryOutcomes());
+                notesContentTV.setText(entryContent.getEntryNotes());
+                decisionsContentTV.setText(entryContent.getEntryDecisions());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -110,20 +147,5 @@ public class ViewEntryActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    //@onClick(R.id."WhateverTheHellWeCallTheButton")
-    public void saveButton() {
-
-        //EntryContent entryContent = new EntryContent();
-        DatabaseReference entryRef = mDatabase.getReference();
-        /*
-        entryRef.child("users").child.("Journals").push().setValue(entryContent.setEntryTitle(entryNameTxtBox.getText.toString()));
-        entryRef.child("users").child.("Journals").push().setValue(entryContent.setEntryObligations(obligationsTxtBox.getText().toString()));
-        entryRef.child("users").child.("Journals").push().setValue(entryContent.getEntryOutcomes(outcomesTxtBox.getText().toString()));
-        entryRef.child("users").child.("Journals").push().setValue(entryContent.getEntryNotes(commentsTxtBox.getText().toString()));
-        */
-        Toast.makeText(getBaseContext(), "You have successfully created a journal entry.", Toast.LENGTH_SHORT).show();
-        finish();
     }
 }

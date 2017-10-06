@@ -4,73 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.group35.journalapp.ViewEntryActivity"
+    tools:context="com.group35.journalapp.ViewSingleEntryActivity"
     tools:showIn="@layout/app_bar_view_single_entry">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="83dp"
-        android:layout_height="154dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView5"
-        android:layout_toLeftOf="@+id/imageView5"
-        android:layout_toStartOf="@+id/imageView5"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView5"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView5"
-        android:layout_toEndOf="@+id/imageView5"
-        android:layout_toRightOf="@+id/imageView5"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView5"
+                android:layout_toEndOf="@+id/imageView5"
+                android:layout_toRightOf="@+id/imageView5"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView6"
-        android:layout_marginTop="32dp"
-        android:layout_toLeftOf="@+id/imageView6"
-        android:layout_toStartOf="@+id/imageView6"
-        android:text="Obligations:" />
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView5"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_below="@+id/textView9"
-        android:layout_marginTop="52dp"
-        android:text="Outcome:" />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView5"
+                android:layout_toLeftOf="@+id/imageView5"
+                android:layout_toStartOf="@+id/imageView5"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView20"
-        android:layout_alignStart="@+id/textView20"
-        android:layout_below="@+id/textView20"
-        android:layout_marginTop="45dp"
-        android:text="Addition Comments:" />
+            <TextView
+                android:id="@+id/obligationsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView6"
+                android:layout_marginTop="32dp"
+                android:text="Obligations:"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/obligationsContentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/obligationsTV"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/decisionsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/obligationsContentTV"
+                android:layout_marginTop="16dp"
+                android:text="Decisions"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/decisionsContentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/decisionsTV"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/outcomeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/decisionsContentTV"
+                android:layout_marginTop="16dp"
+                android:text="Outcome:"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/outcomeContentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/outcomeTV"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/notesTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/outcomeContentTV"
+                android:layout_marginTop="16dp"
+                android:text="Additional Comments:"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/notesContentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notesTV"
+                android:text="TextView" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

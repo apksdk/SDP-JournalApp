@@ -9,7 +9,6 @@
     tools:context="com.group35.journalapp.ViewEntriesActivity"
     tools:showIn="@layout/app_bar_view_entries">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/viewEntriesRV"
         android:layout_width="match_parent"
