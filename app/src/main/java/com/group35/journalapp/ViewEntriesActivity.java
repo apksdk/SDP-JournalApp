@@ -20,8 +20,10 @@ import android.support.v7.widget.RecyclerView.Adapter;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.group35.journalapp.models.EntryContent;
 import com.group35.journalapp.models.Journal;
 
 import butterknife.BindView;
@@ -30,6 +32,7 @@ public class ViewEntriesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private FirebaseUser mUser = mAuth.getCurrentUser();
 
     @BindView(R.id.viewJournalsRV)
     RecyclerView viewEntriesRV;
@@ -62,25 +65,28 @@ public class ViewEntriesActivity extends AppCompatActivity
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         viewEntriesRV.addItemDecoration(dividerItemDecoration);
 
-        DatabaseReference journalsRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
-        FirebaseRecyclerAdapter<Journal, JournalHolder> mAdapter = new FirebaseRecyclerAdapter<Journal, JournalHolder>(
+        DatabaseReference entriesRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
+        FirebaseRecyclerAdapter<EntryContent, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<EntryContent, EntryHolder>(
                 Journal.class,
-                R.layout.item_journal,
-                JournalHolder.class,
-                journalsRef) {
+                R.layout.item_entry,
+                EntryHolder.class,
+                entriesRef) {
             @Override
-            protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
+            protected void populateViewHolder(EntryHolder viewHolder, EntryContent model, int position) {
                 Glide.with(ViewEntriesActivity.this).load(model.getJournalImageLink()).into(viewHolder.getJournalPreviewIV());
-                viewHolder.setJournalTitleTV(model.getJournalName());
-                viewHolder.setDescriptionTV(model.getJournalDescription());
-                viewHolder.setDateTV(model.getJournalModifiedDate());
+                viewHolder.setEntryTitleTV(model.getEntryTitle());
+                viewHolder.setObligationsTV(model.getEntryObligations());
+                viewHolder.setDecisionsTV(model.getEntryDecisions());
+                viewHolder.setOutcomesTV(model.getEntryOutcomes());
+                viewHolder.setCommentsTV(model.getEntryNotes());
+
 
                 if (model.getJournalEntries() != null) {
                     viewHolder.setRecordedEntriesTV(String.valueOf(model.getJournalEntries().size()));
                 }
             }
         };
-        viewJournalsRV.setAdapter(mAdapter);
+        viewEntriesRV.setAdapter(mAdapter);
     }
 
     @Override

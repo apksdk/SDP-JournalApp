@@ -24,6 +24,9 @@ public class EntryHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.obligationsTV)
     TextView mObligationsTV;
 
+    @BindView(R.id.decisionsTV)
+    TextView mDecisionsTV;
+
     @BindView(R.id.outcomesTV)
     TextView mOutcomesTV;
 
@@ -33,14 +36,13 @@ public class EntryHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.EntriesLayout)
     RelativeLayout mEntriesLayout;
 
-    private Context context;
+    private Context mContext;
 
     public EntryHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         context = itemView.getContext();
     }
-
 
     public TextView getEntryTitleTV() {
         return mEntryTitleTV;
@@ -56,6 +58,13 @@ public class EntryHolder extends RecyclerView.ViewHolder {
 
     public void setObligationsTV(String obligations) {
         mObligationsTV.setText(obligations);
+    }
+    public TextView getDecisionsTV() {
+        return mOutcomesTV;
+    }
+
+    public void setDecisionsTV(String decisions) {
+        mDecisionsTV.setText(decisions);
     }
 
     public TextView getOutcomesTV() {
@@ -74,9 +83,11 @@ public class EntryHolder extends RecyclerView.ViewHolder {
         mCommentsTV.setText(comments);
     }
 
+
     @OnClick(R.id.entriesLayout)
     public void entriesClickHandler(View view) {
-        //Pass some info here as intent
-        context.startActivity(new Intent(context, ViewEntriesActivity.class));
+        Intent intent = new Intent(mContext, ViewEntriesActivity.class);
+        intent.putExtra("Entry", "");
+        mContext.startActivity(intent);
     }
 }

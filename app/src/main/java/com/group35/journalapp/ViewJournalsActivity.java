@@ -75,7 +75,7 @@ public class ViewJournalsActivity extends AppCompatActivity
                 journalsRef) {
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
-                Glide.with(ViewJournalsActivity.this).load(model.getJournalImageLink()).into(viewHolder.getJournalPreviewIV());
+                Glide.with(ViewJournalsActivity.this).load(model.getJournalImageL).into(viewHolder.getJournalPreviewIV());
                 viewHolder.setJournalTitleTV(model.getJournalName());
                 viewHolder.setDescriptionTV(model.getJournalDescription());
                 viewHolder.setDateTV(model.getJournalModifiedDate());
