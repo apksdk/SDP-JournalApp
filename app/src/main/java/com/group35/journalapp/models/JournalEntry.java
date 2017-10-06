@@ -38,7 +38,7 @@ public class JournalEntry {
         this.mJournalLastModifyDate = lastModifyDate;
         this.mJournalEntryVersion = entryVersion;
         mJournalEntryDeleted = false;
-        mJournalEntryDeleted = false;
+        mJournalEntryHidden = false;
         mEntryContentList = new ArrayList<EntryContent>();
     }
 
