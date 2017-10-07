@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.group35.journalapp.ViewSingleEntryActivity"
-    tools:showIn="@layout/app_bar_view_single_entry">
+    tools:context="com.group35.journalapp.EditSingleEntryActivity"
+    tools:showIn="@layout/app_bar_edit_single_entry">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -61,60 +61,60 @@
                 android:text="Obligations:"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/obligationsContentTV"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/obligationsContentET"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/obligationsTV"
-                android:text="foo" />
+                android:hint="Obligations" />
 
             <TextView
                 android:id="@+id/decisionsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/obligationsContentTV"
+                android:layout_below="@+id/obligationsContentET"
                 android:layout_marginTop="16dp"
                 android:text="Decisions"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/decisionsContentTV"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/decisionsContentET"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/decisionsTV"
-                android:text="foo" />
+                android:hint="Decisions" />
 
             <TextView
                 android:id="@+id/outcomeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/decisionsContentTV"
+                android:layout_below="@+id/decisionsContentET"
                 android:layout_marginTop="16dp"
                 android:text="Outcome:"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/outcomeContentTV"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/outcomeContentET"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/outcomeTV"
-                android:text="foo" />
+                android:hint="Outcome" />
 
             <TextView
                 android:id="@+id/notesTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/outcomeContentTV"
+                android:layout_below="@+id/outcomeContentET"
                 android:layout_marginTop="16dp"
-                android:text="Additional Comments:"
+                android:text="Additional Notes:"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/notesContentTV"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/notesContentET"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/notesTV"
-                android:text="foo" />
+                android:hint="Notes" />
         </RelativeLayout>
     </ScrollView>
 

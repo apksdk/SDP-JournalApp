@@ -14,6 +14,7 @@
 
     <!--For Login Activity-->
     <string name="sign_in_message">Attempting to sign in...</string>
+    <string name="title_edit_single_entry">Edit An Entry</string>
 
     <!--For Register Activity-->
 

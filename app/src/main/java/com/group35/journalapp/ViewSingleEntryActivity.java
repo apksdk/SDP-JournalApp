@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
     private String mEntryTitle;
     private String mEntryDescription;
     private String mEntryVersion;
+    private String mJournalID;
 
     @BindView(R.id.obligationsContentTV)
     TextView obligationsContentTV;
@@ -71,11 +73,12 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         mEntryTitle = intent.getStringExtra("entryTitle");
         mEntryDescription = intent.getStringExtra("entryDescription");
         mEntryVersion = intent.getStringExtra("entryVersion");
+        mJournalID = intent.getStringExtra("journalID");
 
         DatabaseReference entryContentRef = mDatabase.getReference().child("EntryContents")
                 .child(mUser.getDisplayName()).child(mEntryID).child(mEntryVersion);
 
-        entryContentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        entryContentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 EntryContent entryContent = dataSnapshot.getValue(EntryContent.class);
@@ -118,7 +121,20 @@ public class ViewSingleEntryActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            String obligations = obligationsContentTV.getText().toString();
+            String decisions = decisionsContentTV.getText().toString();
+            String outcome = outcomeContentTV.getText().toString();
+            String notes = notesContentTV.getText().toString();
+
+            Intent editEntryIntent = new Intent(ViewSingleEntryActivity.this, EditSingleEntryActivity.class);
+            editEntryIntent.putExtra("entryID", mEntryID);
+            editEntryIntent.putExtra("entryObligations", obligations);
+            editEntryIntent.putExtra("entryDecisions", decisions);
+            editEntryIntent.putExtra("entryOutcome", outcome);
+            editEntryIntent.putExtra("entryNotes", notes);
+            editEntryIntent.putExtra("entryVersion", mEntryVersion);
+            editEntryIntent.putExtra("journalID", mJournalID);
+            startActivity(editEntryIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -133,7 +149,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

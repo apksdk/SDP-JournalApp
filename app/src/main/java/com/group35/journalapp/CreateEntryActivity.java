@@ -154,11 +154,9 @@ public class CreateEntryActivity extends AppCompatActivity
         String entryDecisions = entryDecisionsET.getText().toString();
         String entryOutcomes = entryOutcomesET.getText().toString();
 
-        //TO DO: GET CURRENT DATE & TIME & REMOVE ENTRY TITLE FROM CONSTRUCTOR
-        String date = new SimpleDateFormat("dd/MM/yyyy hh:mma", Locale.getDefault()).format(new Date());
-
+        String date = new SimpleDateFormat("dd/MM/yyyy hh:mm:ssa", Locale.getDefault()).format(new Date());
         Entry entry = new Entry(entryTitle, entryNotes, date, 0);
-        EntryContent entryContent = new EntryContent(entryNotes, entryObligations, entryDecisions, entryOutcomes, date);
+        EntryContent entryContent = new EntryContent(entryNotes, entryObligations, entryDecisions, entryOutcomes, date, 0);
         DatabaseReference entryRef = mDatabase.getReference();
         // Save entry to database
         if (!entryTitle.isEmpty()) {

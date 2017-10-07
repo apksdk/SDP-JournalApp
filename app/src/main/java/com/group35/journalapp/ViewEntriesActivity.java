@@ -86,6 +86,7 @@ public class ViewEntriesActivity extends AppCompatActivity
                 viewHolder.setEntryDescriptionTV(model.getEntryPreview());
                 viewHolder.setLastModifiedTimeTV(model.getLastModifyDate());
                 viewHolder.setEntryID(getRef(position).getKey());
+                viewHolder.setJournalID(mJournalID);
 
                 if (!model.getEntryContentList().isEmpty()) {
                     viewHolder.setEntryVersion(model.getEntryContentList().get(model.getEntryContentList().size() - 1));

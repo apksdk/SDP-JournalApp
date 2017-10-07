@@ -28,6 +28,7 @@ public class EntryHolder extends RecyclerView.ViewHolder {
     private Context mContext;
     private String mEntryID;
     private String mEntryVersion;
+    private String mJournalID;
 
     public EntryHolder(View itemView) {
         super(itemView);
@@ -42,6 +43,7 @@ public class EntryHolder extends RecyclerView.ViewHolder {
         intent.putExtra("entryTitle", mEntryTitleTV.getText().toString());
         intent.putExtra("entryDescription", mEntryDescriptionTV.getText().toString());
         intent.putExtra("entryVersion", mEntryVersion);
+        intent.putExtra("journalID", mJournalID);
         mContext.startActivity(intent);
     }
 
@@ -79,5 +81,9 @@ public class EntryHolder extends RecyclerView.ViewHolder {
 
     public void setEntryVersion(String mEntryVersion) {
         this.mEntryVersion = mEntryVersion;
+    }
+
+    public void setJournalID(String mJournalID) {
+        this.mJournalID = mJournalID;
     }
 }

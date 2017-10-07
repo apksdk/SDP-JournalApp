@@ -28,12 +28,13 @@ public class EntryContent {
      * @param entryOutcomes    the entry outcomes
      * @param date             the entry date
      */
-    public EntryContent(String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes, String date) {
+    public EntryContent(String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes, String date, int entryVersion) {
         mEntryNotes = entryNotes;
         mEntryObligations = entryObligations;
         mEntryDecisions = entryDecisions;
         mEntryOutcomes = entryOutcomes;
         mEntryModifiedDate = date;
+        mEntryVersion = entryVersion;
     }
 
     /**
