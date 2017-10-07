@@ -2,21 +2,21 @@
 This will allow all developers to see and find tasks to be done.
 This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 
-### Functional 3/15
-- [ ] Start a New Journal
-- [ ] View a Table of Journal
+### Functional 10/15
+- [X] Start a New Journal
+- [X] View a Table of Journal
 - [ ] Delete a Journal
-- [ ] Create a New Entry
-- [ ] View a Table of Entries
-- [ ] Modify an Entry
+- [X] Create a New Entry
+- [X] View a Table of Entries
+- [X] Modify an Entry
 - [X] Register a User
 - [X] Sign into the Journal
 - [X] Sign out of the Journal
-- [ ] Record Date & Time of Entry
+- [X] Record Date & Time of Entry
 - [ ] Flag/Hide Entries
 - [ ] Show Active, Show Hidden, Show Flagged, Show All
 - [ ] Display Entries by Date
-- [ ] Record Journal and Entry changes
+- [X] Record Journal and Entry changes
 - [ ] Keyword Search Function (Biggie)
 
 ### Functional Optional 1/4
@@ -30,12 +30,13 @@ This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 - [ ] Easy to Use
 - [ ] Fast Response Time
 
-### User Interface Screens 0/8
+### User Interface Screens 0/9
 - [ ] Sign In
 - [ ] Register
 - [ ] View Journals
 - [ ] New Journal
 - [ ] View Entries
 - [ ] New Entry
+- [ ] Edit Entry
 - [ ] View Entry Contents
 - [ ] View Entry History
