@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_view_single_entry"
+        layout="@layout/app_bar_edit_single_entry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

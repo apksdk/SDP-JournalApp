@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.group35.journalapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +34,7 @@
             android:label="@string/title_activity_view_entries"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ViewEntryActivity"
+            android:name=".ViewSingleEntryActivity"
             android:label="@string/title_activity_view_entry"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -45,7 +45,10 @@
             android:name=".EntryHistoryActivity"
             android:label="@string/title_activity_entry_history"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Main2Activity"></activity>
+        <activity
+            android:name=".EditSingleEntryActivity"
+            android:label="@string/title_edit_single_entry"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
