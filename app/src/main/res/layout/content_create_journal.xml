@@ -9,11 +9,11 @@
     tools:context="com.group35.journalapp.CreateJournalActivity"
     tools:showIn="@layout/app_bar_create_journal">
 
-<Spinner
-    android:layout_width = "wrap_content"
-    android:layout_height = "wrap_content"
-    android:id = "@+id/spin">
-</Spinner>
+    <Spinner
+        android:id="@+id/spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/changeImageTV"
@@ -22,7 +22,8 @@
         android:layout_below="@+id/imagePreviewIV"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:text="Tap the icon to change the image" />
+        android:text="Tap the icon to change the image"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/imagePreviewIV"

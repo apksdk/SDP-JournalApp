@@ -83,28 +83,6 @@ public class CreateJournalActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.create_journal, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -113,12 +91,6 @@ public class CreateJournalActivity extends AppCompatActivity
 
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -180,7 +152,7 @@ public class CreateJournalActivity extends AppCompatActivity
         }
     }
 
-    @OnClick(R.id.imagePreviewIV)
+    //@OnClick(R.id.imagePreviewIV)
     public void imageSelector(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

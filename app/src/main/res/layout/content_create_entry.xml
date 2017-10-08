@@ -2,12 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createEntryLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.group35.journalapp.CreateEntryActivity"
     tools:layout_editor_absoluteX="0dp"
-    android:layout_margin="8dp"
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/app_bar_create_entry">
 
@@ -15,103 +16,103 @@
         android:id="@+id/addMediaTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
         android:text="Tap to add a media"
         android:visibility="invisible"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/entryTitleET"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="33dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/entryTitleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entry name"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/entryTitleET"
+        android:layout_marginLeft="6dp"
         android:layout_marginStart="6dp"
-        tools:layout_constraintLeft_creator="1"
+        android:text="Entry name"
+        app:layout_constraintBottom_toTopOf="@+id/entryTitleET"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="6dp" />
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/entryTitleET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:ems="10"
         android:hint="Enter the entry name"
         android:inputType="textPersonName"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/entryObligationsET"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintLeft_toLeftOf="@+id/entryTitleTV" />
+        app:layout_constraintLeft_toLeftOf="@+id/entryTitleTV"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <TextView
         android:id="@+id/entryObligationsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Obligations"
-        tools:layout_constraintTop_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/entryTitleET"
         app:layout_constraintTop_toBottomOf="@+id/entryTitleET"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/entryTitleET" />
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
         android:id="@+id/entryObligationsET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
         android:ems="10"
         android:hint="Enter the details here..."
         android:inputType="textPersonName"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/entryDecisionsET"
+        app:layout_constraintLeft_toLeftOf="@+id/entryTitleET"
         app:layout_constraintRight_toRightOf="@+id/entryTitleET"
+        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="11dp"
-        app:layout_constraintLeft_toLeftOf="@+id/entryTitleET" />
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/entryDecisionsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decisions"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/entryDecisionsET"
+        android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
-        tools:layout_constraintLeft_creator="1"
+        android:text="Decisions"
+        app:layout_constraintBottom_toTopOf="@+id/entryDecisionsET"
         app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET"
-        android:layout_marginLeft="2dp" />
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/entryDecisionsET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:ems="10"
         android:hint="Enter your decisions here..."
         android:inputType="textPersonName"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/entryOutcomesET"
+        app:layout_constraintLeft_toLeftOf="@+id/entryObligationsET"
         app:layout_constraintRight_toRightOf="@+id/entryObligationsET"
+        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintLeft_toLeftOf="@+id/entryObligationsET" />
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/entryOutcomesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Outcomes"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="179dp"
-        app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET" />
+        android:text="Outcomes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
     <EditText
         android:id="@+id/entryOutcomesET"
@@ -120,68 +121,75 @@
         android:ems="10"
         android:hint="Enter your decisions here..."
         android:inputType="textPersonName"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET"
         app:layout_constraintRight_toRightOf="@+id/entryDecisionsET"
         app:layout_constraintTop_toBottomOf="@+id/entryOutcomesTV"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/entryNotesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Additional comments"
-        tools:layout_constraintTop_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/entryOutcomesET"
         app:layout_constraintTop_toBottomOf="@+id/entryOutcomesET"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/entryOutcomesET" />
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
         android:id="@+id/entryNotesET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="Enter your comments here..."
         android:inputType="textPersonName"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
         app:layout_constraintRight_toRightOf="@+id/linearLayout"
+        tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintLeft_toLeftOf="@+id/linearLayout" />
+        tools:layout_constraintRight_creator="1" />
 
     <ImageView
         android:id="@+id/addMediaIV"
         android:layout_width="92dp"
         android:layout_height="0dp"
-        app:srcCompat="@drawable/icon"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/addMediaTV"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="73dp"
-        app:layout_constraintTop_toBottomOf="@+id/entryNotesTV"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:id="@+id/linearLayout">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="73dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryNotesTV"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <Button
+            android:id="@+id/cancelEntryBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/entryConfirmBTN"
@@ -189,12 +197,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Confirm" />
-
-        <Button
-            android:id="@+id/cancelBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancel" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

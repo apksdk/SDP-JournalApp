@@ -5,25 +5,26 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/entryHistoryPreviewIV"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/entryVersionTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/entryHistoryPreviewIV"
+        android:layout_toRightOf="@+id/entryHistoryPreviewIV"
         android:text="Edit #2" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/lastModifiedTimeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -32,12 +33,12 @@
         android:text="8/27/2017 4:20PM" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/entryChangesNoteTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
+        android:layout_below="@+id/entryVersionTV"
+        android:layout_toEndOf="@+id/entryHistoryPreviewIV"
+        android:layout_toRightOf="@+id/entryHistoryPreviewIV"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="Comment regarding to changes" />

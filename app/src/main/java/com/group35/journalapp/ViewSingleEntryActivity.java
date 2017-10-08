@@ -120,7 +120,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_edit_entry) {
             String obligations = obligationsContentTV.getText().toString();
             String decisions = decisionsContentTV.getText().toString();
             String outcome = outcomeContentTV.getText().toString();
@@ -135,6 +135,11 @@ public class ViewSingleEntryActivity extends AppCompatActivity
             editEntryIntent.putExtra("entryVersion", mEntryVersion);
             editEntryIntent.putExtra("journalID", mJournalID);
             startActivity(editEntryIntent);
+        } else if( id == R.id.action_view_history) {
+            Intent entryHistoryIntent = new Intent(ViewSingleEntryActivity.this, EntryHistoryActivity.class);
+            entryHistoryIntent.putExtra("entryID", mEntryID);
+            entryHistoryIntent.putExtra("entryTitle", mEntryTitle);
+            startActivity(entryHistoryIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -148,12 +153,6 @@ public class ViewSingleEntryActivity extends AppCompatActivity
 
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

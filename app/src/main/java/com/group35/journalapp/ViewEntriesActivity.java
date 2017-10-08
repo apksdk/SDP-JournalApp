@@ -109,7 +109,7 @@ public class ViewEntriesActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.view_entries, menu);
+        getMenuInflater().inflate(R.menu.view_menu, menu);
         return true;
     }
 
@@ -136,12 +136,6 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

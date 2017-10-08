@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -75,7 +76,11 @@ public class ViewJournalsActivity extends AppCompatActivity
                 journalsRef) {
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
+                RequestOptions requestOptions = new RequestOptions();
+                requestOptions.placeholder(R.drawable.icon);
+
                 Glide.with(ViewJournalsActivity.this)
+                        .setDefaultRequestOptions(requestOptions)
                         .load(model.getJournalImageLink())
                         .into(viewHolder.getJournalPreviewIV());
                 viewHolder.setJournalTitleTV(model.getJournalName());
@@ -103,7 +108,7 @@ public class ViewJournalsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.view_journals, menu);
+        getMenuInflater().inflate(R.menu.view_menu, menu);
         return true;
     }
 
@@ -115,8 +120,9 @@ public class ViewJournalsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_sign_out) {
+            mAuth.signOut();
+            startActivity(new Intent(ViewJournalsActivity.this, LoginActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -130,12 +136,6 @@ public class ViewJournalsActivity extends AppCompatActivity
 
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -145,10 +145,5 @@ public class ViewJournalsActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void signOutHandler(MenuItem item) {
-        mAuth.signOut();
-        startActivity(new Intent(ViewJournalsActivity.this, LoginActivity.class));
     }
 }
