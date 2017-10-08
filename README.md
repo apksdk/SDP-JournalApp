@@ -2,7 +2,7 @@
 This will allow all developers to see and find tasks to be done.
 This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 
-### Functional 10/15
+### Functional 11/16
 - [X] Start a New Journal
 - [X] View a Table of Journal
 - [ ] Delete a Journal
@@ -17,6 +17,7 @@ This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 - [ ] Show Active, Show Hidden, Show Flagged, Show All
 - [ ] Display Entries by Date
 - [X] Record Journal and Entry changes
+- [X] Display Entry Changes (Entry History)
 - [ ] Keyword Search Function (Biggie)
 
 ### Functional Optional 1/4
