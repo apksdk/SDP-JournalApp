@@ -22,6 +22,15 @@ class EntryContentHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.entryChangesNoteTV)
     TextView entryChangesNoteTV;
 
+    @BindView(R.id.entryObligationsTV)
+    TextView entryObligationsTV;
+
+    @BindView(R.id.entryDecisionsTV)
+    TextView entryDecisionsTV;
+
+    @BindView(R.id.entryOutcomeTV)
+    TextView entryOutcomeTV;
+
     private Context mContext;
     private String mEntryID;
     private int mEntryVersion;
@@ -54,5 +63,29 @@ class EntryContentHolder extends RecyclerView.ViewHolder {
 
     public void setEntryChangesNoteTV(String entryChangesNote) {
         entryChangesNoteTV.setText(entryChangesNote);
+    }
+
+    public TextView getEntryObligationsTV() {
+        return entryObligationsTV;
+    }
+
+    public void setEntryObligationsTV(String entryObligations) {
+        entryObligationsTV.setText(entryObligations);
+    }
+
+    public TextView getEntryDecisionsTV() {
+        return entryDecisionsTV;
+    }
+
+    public void setEntryDecisionsTV(String entryDecisions) {
+        entryDecisionsTV.setText(entryDecisions);
+    }
+
+    public TextView getEntryOutcomeTV() {
+        return entryOutcomeTV;
+    }
+
+    public void setEntryOutcomeTV(String entryOutcome) {
+        entryOutcomeTV.setText(entryOutcome);
     }
 }

@@ -73,8 +73,11 @@ public class EntryHistoryActivity extends AppCompatActivity
             @Override
             protected void populateViewHolder(EntryContentHolder viewHolder, EntryContent model, int position) {
                 viewHolder.setLastModifiedTimeTV(model.getEntryModifiedDate());
-                viewHolder.setEntryVersionTV("Entry Version : " + model.getEntryVersion());
-                viewHolder.setEntryChangesNoteTV(model.getEntryNotes());
+                viewHolder.setEntryVersionTV("Entry Version: " + model.getEntryVersion());
+                viewHolder.setEntryObligationsTV("Obligations: \n" + model.getEntryObligations());
+                viewHolder.setEntryDecisionsTV("Decisions: \n" + model.getEntryDecisions());
+                viewHolder.setEntryOutcomeTV("Outcome: \n" + model.getEntryOutcomes());
+                viewHolder.setEntryChangesNoteTV("Notes: \n" + model.getEntryNotes());
             }
         };
         entryHistoryRV.setAdapter(mAdapter);

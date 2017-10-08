@@ -33,7 +33,7 @@
         android:text="8/27/2017 4:20PM" />
 
     <TextView
-        android:id="@+id/entryChangesNoteTV"
+        android:id="@+id/entryObligationsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/entryVersionTV"
@@ -41,5 +41,38 @@
         android:layout_toRightOf="@+id/entryHistoryPreviewIV"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Comment regarding to changes" />
+        android:text="Obligations" />
+
+    <TextView
+        android:id="@+id/entryDecisionsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/entryObligationsTV"
+        android:layout_toEndOf="@+id/entryHistoryPreviewIV"
+        android:layout_toRightOf="@+id/entryHistoryPreviewIV"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Decisions" />
+
+    <TextView
+        android:id="@+id/entryOutcomeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/entryDecisionsTV"
+        android:layout_toEndOf="@+id/entryHistoryPreviewIV"
+        android:layout_toRightOf="@+id/entryHistoryPreviewIV"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Outcome" />
+
+    <TextView
+        android:id="@+id/entryChangesNoteTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/entryOutcomeTV"
+        android:layout_toEndOf="@+id/entryHistoryPreviewIV"
+        android:layout_toRightOf="@+id/entryHistoryPreviewIV"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Entry Notes" />
 </RelativeLayout>

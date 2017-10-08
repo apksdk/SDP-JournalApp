@@ -121,8 +121,9 @@ public class ViewEntriesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_sign_out) {
+            mAuth.signOut();
+            startActivity(new Intent(ViewEntriesActivity.this, LoginActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
