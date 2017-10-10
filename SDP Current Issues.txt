@@ -1,0 +1,41 @@
+All Activities
+- Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
+- Navigation Menu does not update username/email/profile pic
+
+ViewJournalsActivity
+- No messages to display the app is loading data
+- No message to display there's no journals created under the user's account
+- Default description gets overwritten even though there's nothing to overwrite with
+- Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
+
+CreateJournalActivity
+- No message to inform saving journal
+- Pressing back on the device does not trigger the confirm exit dialog if there's
+entered data in the activity.
+
+ViewEntriesActivity
+- Placeholder pic is irrelevant to the application
+- Default description gets overwritten (like ViewJournalsActivity)
+- Floating Action Button is irrelevant to its function (add new entry)
+- No message to inform the user there's no entries in the journal
+
+CreateEntryActivity
+- Does not check if all text fields have data before submitting
+- Incorrect hints in text fields
+- Obligations/Decisions/Outcomes/Additional Comments do not expand downwards when
+- (Optional) Can't add attachments
+the entered text is more than 1 line. (Makes it hard to review what they wrote)
+- Pressing back on the device does not trigger the confirm exit dialog if there's
+entered data in the activity.
+
+ViewSingleEntryActivity
+- No way to tell which selected entry is this
+- Image View loads nothing
+
+EditEntryActivity
+- Useless ImageViews
+- Does not check for changes when leaving (Should confirm exit to avoid accidental info loss)
+- No dialog to inform saving changes
+
+ViewEditHistoryActivity
+- Placeholder image is irrelevant to the item
