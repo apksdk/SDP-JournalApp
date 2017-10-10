@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.group35.journalapp.models.Entry;
 
 import butterknife.BindView;
@@ -29,11 +30,16 @@ import butterknife.ButterKnife;
 public class ViewEntriesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int RV_SETUP_HIDE_HIDDEN_DELETED = 1;
+    private static final int RV_SETUP_SHOW_HIDDEN_DELETED = 2;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser = mAuth.getCurrentUser();
 
     private String mJournalID;
+    private boolean mToggleHiddenDeletedEntries;
+
+    private MenuItem clickedItem;
 
     @BindView(R.id.viewEntriesRV)
     RecyclerView viewEntriesRV;
@@ -70,16 +76,29 @@ public class ViewEntriesActivity extends AppCompatActivity
         Intent intent = getIntent();
         mJournalID = intent.getStringExtra("journalID");
 
-        viewEntriesRV.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        viewEntriesRV.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         viewEntriesRV.addItemDecoration(dividerItemDecoration);
+        setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED);
+    }
 
+    private void setupRecyclerView(int setupCode) {
         DatabaseReference entriesRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName()).child(mJournalID);
+        Query entriesQuery;
+        if (setupCode == RV_SETUP_SHOW_HIDDEN_DELETED) {
+            entriesQuery = entriesRef;
+        } else {
+            entriesQuery = entriesRef.orderByChild("entryDeleted_Hidden").equalTo("false_false");
+        }
+
         FirebaseRecyclerAdapter<Entry, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<Entry, EntryHolder>(
                 Entry.class,
                 R.layout.item_journal_entry,
                 EntryHolder.class,
-                entriesRef) {
+                entriesQuery) {
             @Override
             protected void populateViewHolder(EntryHolder viewHolder, Entry model, int position) {
                 viewHolder.setEntryTitleTV(model.getEntryTitle());
@@ -87,6 +106,8 @@ public class ViewEntriesActivity extends AppCompatActivity
                 viewHolder.setLastModifiedTimeTV(model.getLastModifyDate());
                 viewHolder.setEntryID(getRef(position).getKey());
                 viewHolder.setJournalID(mJournalID);
+                viewHolder.setDeleted(model.isJournalEntryDeleted());
+                viewHolder.setHidden(model.isJournalEntryHidden());
 
                 if (!model.getEntryContentList().isEmpty()) {
                     viewHolder.setEntryVersion(model.getEntryContentList().get(model.getEntryContentList().size() - 1));
@@ -110,6 +131,7 @@ public class ViewEntriesActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.view_menu, menu);
+        clickedItem = menu.findItem(R.id.action_toggle_view);
         return true;
     }
 
@@ -124,6 +146,16 @@ public class ViewEntriesActivity extends AppCompatActivity
         if (id == R.id.action_sign_out) {
             mAuth.signOut();
             startActivity(new Intent(ViewEntriesActivity.this, LoginActivity.class));
+        } else if (id == R.id.action_toggle_view) {
+            if (mToggleHiddenDeletedEntries) {
+                clickedItem.setTitle("Show Hidden/Deleted Entries");
+                mToggleHiddenDeletedEntries = false;
+                setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED);
+            } else {
+                clickedItem.setTitle("Hide Hidden/Deleted Entries");
+                mToggleHiddenDeletedEntries = true;
+                setupRecyclerView(RV_SETUP_SHOW_HIDDEN_DELETED);
+            }
         }
 
         return super.onOptionsItemSelected(item);

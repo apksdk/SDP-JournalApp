@@ -12,5 +12,14 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/viewEntriesRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/optionsHintTV" />
+
+    <TextView
+        android:id="@+id/optionsHintTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Long tap to display additional options" />
 </RelativeLayout>

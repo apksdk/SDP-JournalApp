@@ -33,6 +33,7 @@
                 android:layout_below="@+id/imageView5"
                 android:layout_toEndOf="@+id/imageView5"
                 android:layout_toRightOf="@+id/imageView5"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
             <ImageView
@@ -41,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView5"
                 android:layout_centerHorizontal="true"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
             <ImageView
@@ -50,6 +52,7 @@
                 android:layout_below="@+id/imageView5"
                 android:layout_toLeftOf="@+id/imageView5"
                 android:layout_toStartOf="@+id/imageView5"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
 
             <TextView

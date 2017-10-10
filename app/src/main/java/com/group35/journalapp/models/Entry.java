@@ -14,6 +14,7 @@ public class Entry {
     private int mEntryVersion;
     private boolean mEntryHidden;
     private boolean mEntryDeleted;
+    private String mEntryDeleted_Hidden;
     private ArrayList<String> mEntryContentList;
 
     /**
@@ -23,13 +24,14 @@ public class Entry {
 
     }
 
-    /**\
+    /**
+     * \
      * Instantiates a new Journal entry.
      *
-     * @param entryTitle       the entry title
-     * @param entryPreview the entry preview
-     * @param lastModifyDate   the last modify date
-     * @param entryVersion     the entry version
+     * @param entryTitle     the entry title
+     * @param entryPreview   the entry preview
+     * @param lastModifyDate the last modify date
+     * @param entryVersion   the entry version
      */
     public Entry(String entryTitle, String entryPreview, String lastModifyDate, int entryVersion) {
         mEntryTitle = entryTitle;
@@ -38,16 +40,21 @@ public class Entry {
         mEntryVersion = entryVersion;
         mEntryDeleted = false;
         mEntryHidden = false;
+        mEntryDeleted_Hidden = "false_false";
         mEntryContentList = new ArrayList<>();
     }
 
-    public String getEntryID() { return mEntryID; }
+    public String getEntryID() {
+        return mEntryID;
+    }
 
     public void setEntryID(String mJournalEntryID) {
         mEntryID = mJournalEntryID;
     }
 
-    public String getEntryAuthor() { return mEntryAuthor; }
+    public String getEntryAuthor() {
+        return mEntryAuthor;
+    }
 
     public void setEntryAuthor(String mJournalEntryAuthor) {
         mEntryAuthor = mJournalEntryAuthor;
@@ -110,5 +117,13 @@ public class Entry {
 
     public void setEntryContentList(ArrayList<String> mEntryContentList) {
         this.mEntryContentList = mEntryContentList;
+    }
+
+    public String getEntryDeleted_Hidden() {
+        return mEntryDeleted_Hidden;
+    }
+
+    public void setEntryDeleted_Hidden(String mEntryDeleted_Hidden) {
+        this.mEntryDeleted_Hidden = mEntryDeleted_Hidden;
     }
 }

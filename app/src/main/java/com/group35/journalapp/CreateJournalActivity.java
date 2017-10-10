@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,8 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -139,7 +138,7 @@ public class CreateJournalActivity extends AppCompatActivity
             journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
@@ -165,9 +164,9 @@ public class CreateJournalActivity extends AppCompatActivity
                 //Context context;
                 //String colours[] = context.getResources().getStringArray(R.array.coloursSelect);
                 //skeleton code
-                switch(position) {
+                switch (position) {
                     case 0:
-                       // view.setBackgroundColor(colours[0]);
+                        // view.setBackgroundColor(colours[0]);
                         break;
                     case 1:
 
@@ -220,6 +219,7 @@ public class CreateJournalActivity extends AppCompatActivity
                 }
 
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

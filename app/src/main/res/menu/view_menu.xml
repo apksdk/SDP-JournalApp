@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_sign_out"
+        android:id="@+id/action_toggle_view"
         android:orderInCategory="100"
+        android:title="Show Hidden/Deleted"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sign_out"
+        android:orderInCategory="101"
         android:title="Sign Out"
         app:showAsAction="never" />
 </menu>

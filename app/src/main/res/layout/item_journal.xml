@@ -22,13 +22,15 @@
         android:maxLines="1"
         android:text="Short Description" />
 
+    <!--Probably not going to use this-->
     <TextView
         android:id="@+id/recordedEntriesTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/journalTitleTV"
         android:layout_toRightOf="@+id/journalPreviewIV"
-        android:text="0 Recorded Entries" />
+        android:text="0 Recorded Entries"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/journalTitleTV"

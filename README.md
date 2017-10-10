@@ -13,9 +13,9 @@ This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 - [X] Sign into the Journal
 - [X] Sign out of the Journal
 - [X] Record Date & Time of Entry
-- [ ] Flag/Hide Entries
+- [X] Flag/Hide Entries
 - [ ] Show Active, Show Hidden, Show Flagged, Show All
-- [ ] Display Entries by Date
+- [?] Display Entries by Date (Displays by newest created to oldest entry)
 - [X] Record Journal and Entry changes
 - [X] Display Entry Changes (Entry History)
 - [ ] Keyword Search Function (Biggie)
