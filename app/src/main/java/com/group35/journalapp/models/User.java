@@ -1,9 +1,10 @@
 package com.group35.journalapp.models;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
+ * The User Model
+ * <p>
  * Created by Joshua on 9/24/2017.
  */
 public class User {
@@ -22,7 +23,7 @@ public class User {
     /**
      * Instantiates a new User.
      *
-     * @param userID    the username
+     * @param userID      the username
      * @param email       the email
      * @param profileLink the profile link
      */
@@ -88,10 +89,20 @@ public class User {
         mEmail = email;
     }
 
+    /**
+     * Gets journals.
+     *
+     * @return the journals
+     */
     public ArrayList<Journal> getJournals() {
         return mJournals;
     }
 
+    /**
+     * Sets journals.
+     *
+     * @param mJournals the journals
+     */
     public void setJournals(ArrayList<Journal> mJournals) {
         this.mJournals = mJournals;
     }

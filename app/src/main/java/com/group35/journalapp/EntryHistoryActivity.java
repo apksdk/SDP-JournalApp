@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.group35.journalapp.models.EntryContent;
+import com.group35.journalapp.viewholders.EntryContentHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

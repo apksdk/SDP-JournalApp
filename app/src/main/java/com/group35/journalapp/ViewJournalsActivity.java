@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.group35.journalapp.models.Journal;
+import com.group35.journalapp.viewholders.JournalHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

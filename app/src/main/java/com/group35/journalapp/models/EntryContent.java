@@ -1,6 +1,8 @@
 package com.group35.journalapp.models;
 
 /**
+ * The Journal Entry Content Model
+ * <p>
  * Created by Josh on 28/09/2017.
  */
 public class EntryContent {
@@ -27,6 +29,7 @@ public class EntryContent {
      * @param entryDecisions   the entry decisions
      * @param entryOutcomes    the entry outcomes
      * @param date             the entry date
+     * @param entryVersion     the entry version
      */
     public EntryContent(String entryNotes, String entryObligations, String entryDecisions, String entryOutcomes, String date, int entryVersion) {
         mEntryNotes = entryNotes;
@@ -49,7 +52,7 @@ public class EntryContent {
     /**
      * Sets entry id.
      *
-     * @param mEntryID the m entry id
+     * @param mEntryID the entry id
      */
     public void setEntryID(String mEntryID) {
         this.mEntryID = mEntryID;
@@ -67,7 +70,7 @@ public class EntryContent {
     /**
      * Sets entry version.
      *
-     * @param mEntryVersion the m entry version
+     * @param mEntryVersion the entry version
      */
     public void setEntryVersion(int mEntryVersion) {
         this.mEntryVersion = mEntryVersion;
@@ -85,7 +88,7 @@ public class EntryContent {
     /**
      * Sets entry notes.
      *
-     * @param mEntryNotes the m entry notes
+     * @param mEntryNotes the entry notes
      */
     public void setEntryNotes(String mEntryNotes) {
         this.mEntryNotes = mEntryNotes;
@@ -103,7 +106,7 @@ public class EntryContent {
     /**
      * Sets entry obligations.
      *
-     * @param mEntryObligations the m entry obligations
+     * @param mEntryObligations the entry obligations
      */
     public void setEntryObligations(String mEntryObligations) {
         this.mEntryObligations = mEntryObligations;
@@ -121,7 +124,7 @@ public class EntryContent {
     /**
      * Sets entry decisions.
      *
-     * @param mEntryDecisions the m entry decisions
+     * @param mEntryDecisions the entry decisions
      */
     public void setEntryDecisions(String mEntryDecisions) {
         this.mEntryDecisions = mEntryDecisions;
@@ -139,7 +142,7 @@ public class EntryContent {
     /**
      * Sets entry outcomes.
      *
-     * @param mEntryOutcomes the m entry outcomes
+     * @param mEntryOutcomes the entry outcomes
      */
     public void setEntryOutcomes(String mEntryOutcomes) {
         this.mEntryOutcomes = mEntryOutcomes;
@@ -157,7 +160,7 @@ public class EntryContent {
     /**
      * Sets entry modified date.
      *
-     * @param mEntryModifiedDate the m entry modified date
+     * @param mEntryModifiedDate the entry modified date
      */
     public void setEntryModifiedDate(String mEntryModifiedDate) {
         this.mEntryModifiedDate = mEntryModifiedDate;
