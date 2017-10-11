@@ -53,19 +53,20 @@ public class ViewJournalsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_journals);
+        ButterKnife.bind(this);
+        //Setup UI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ButterKnife.bind(this);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //Opens a new activity to create a journal
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ViewJournalsActivity.this, CreateJournalActivity.class));
             }
         });
-
+        //Nav menu setup
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,11 +75,11 @@ public class ViewJournalsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //Setup RecyclerView
         viewJournalsRV.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         viewJournalsRV.addItemDecoration(dividerItemDecoration);
-
+        //Get database reference for the journal locations
         final DatabaseReference journalsRef = mDatabase.getReference().child("users").child(mUser.getDisplayName()).child("Journals");
         FirebaseRecyclerAdapter<Journal, JournalHolder> mAdapter = new FirebaseRecyclerAdapter<Journal, JournalHolder>(
                 Journal.class,
@@ -87,13 +88,15 @@ public class ViewJournalsActivity extends AppCompatActivity
                 journalsRef) {
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
+                //Initialize Glide's loading options
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.placeholder(R.drawable.icon);
-
+                //Load image using Glide
                 Glide.with(ViewJournalsActivity.this)
                         .setDefaultRequestOptions(requestOptions)
                         .load(model.getJournalImageLink())
                         .into(viewHolder.getJournalPreviewIV());
+                //Setup view holder
                 viewHolder.setJournalTitleTV(model.getJournalName());
                 viewHolder.setDescriptionTV(model.getJournalDescription());
                 viewHolder.setDateTV(model.getJournalModifiedDate());

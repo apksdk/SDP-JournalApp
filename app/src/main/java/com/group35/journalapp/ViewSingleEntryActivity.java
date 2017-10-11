@@ -141,14 +141,16 @@ public class ViewSingleEntryActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //Check which option is selected
         if (id == R.id.action_edit_entry) {
+            //Get entry content
             String obligations = obligationsContentTV.getText().toString();
             String decisions = decisionsContentTV.getText().toString();
             String outcome = outcomeContentTV.getText().toString();
             String notes = notesContentTV.getText().toString();
-
+            //Create new intent
             Intent editEntryIntent = new Intent(ViewSingleEntryActivity.this, EditSingleEntryActivity.class);
+            //Save entry content into the intent
             editEntryIntent.putExtra("entryID", mEntryID);
             editEntryIntent.putExtra("entryObligations", obligations);
             editEntryIntent.putExtra("entryDecisions", decisions);
@@ -156,8 +158,10 @@ public class ViewSingleEntryActivity extends AppCompatActivity
             editEntryIntent.putExtra("entryNotes", notes);
             editEntryIntent.putExtra("entryVersion", mEntryVersion);
             editEntryIntent.putExtra("journalID", mJournalID);
+            //Start edit entry activity
             startActivity(editEntryIntent);
         } else if( id == R.id.action_view_history) {
+            //Create intent & save relevant data before starting activity
             Intent entryHistoryIntent = new Intent(ViewSingleEntryActivity.this, EntryHistoryActivity.class);
             entryHistoryIntent.putExtra("entryID", mEntryID);
             entryHistoryIntent.putExtra("entryTitle", mEntryTitle);

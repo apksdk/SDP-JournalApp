@@ -59,13 +59,13 @@ public class ViewEntriesActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entries);
-
         ButterKnife.bind(this);
-
+        // UI Setup
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //Opens a new activity to create an entry
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class ViewEntriesActivity extends AppCompatActivity
                 startActivity(startCreateEntryIntent);
             }
         });
-
+        //Nav menu initialization
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -83,10 +83,10 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //Get intent & data
         Intent intent = getIntent();
         mJournalID = intent.getStringExtra("journalID");
-
+        //Initialize recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
@@ -96,15 +96,23 @@ public class ViewEntriesActivity extends AppCompatActivity
         setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED);
     }
 
+    /**
+     * Setup the recyclerview depending on the selected option (ie show all or active only)
+     *
+     * @param setupCode Show either all or active entries
+     */
     private void setupRecyclerView(int setupCode) {
         DatabaseReference entriesRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName()).child(mJournalID);
         Query entriesQuery;
+        //Check the user's selected option
         if (setupCode == RV_SETUP_SHOW_HIDDEN_DELETED) {
+            //Displays all entries
             entriesQuery = entriesRef;
         } else {
+            //Filters entries that are not hidden/deleted
             entriesQuery = entriesRef.orderByChild("entryDeleted_Hidden").equalTo("false_false");
         }
-
+        //Setup adapter for RV
         FirebaseRecyclerAdapter<Entry, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<Entry, EntryHolder>(
                 Entry.class,
                 R.layout.item_journal_entry,
@@ -112,6 +120,7 @@ public class ViewEntriesActivity extends AppCompatActivity
                 entriesQuery) {
             @Override
             protected void populateViewHolder(EntryHolder viewHolder, Entry model, int position) {
+                //Initialize the entry's view holder
                 viewHolder.setEntryTitleTV(model.getEntryTitle());
                 viewHolder.setEntryDescriptionTV(model.getEntryPreview());
                 viewHolder.setLastModifiedTimeTV(model.getLastModifyDate());
