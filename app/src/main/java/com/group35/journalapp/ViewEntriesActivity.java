@@ -178,6 +178,7 @@ public class ViewEntriesActivity extends AppCompatActivity
         if (id == R.id.action_sign_out) {
             mAuth.signOut();
             startActivity(new Intent(ViewEntriesActivity.this, LoginActivity.class));
+            finish();
         } else if (id == R.id.action_toggle_view) {
             if (mToggleHiddenDeletedEntries) {
                 clickedItem.setTitle("Show Hidden/Deleted Entries");

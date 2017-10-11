@@ -149,6 +149,7 @@ public class ViewJournalsActivity extends AppCompatActivity
         if (id == R.id.action_sign_out) {
             mAuth.signOut();
             startActivity(new Intent(ViewJournalsActivity.this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
