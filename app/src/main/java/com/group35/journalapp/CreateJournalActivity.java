@@ -37,6 +37,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * The Create journal activity.
+ * <p>
+ * Created by Joshua on 9/18/2017
+ */
 public class CreateJournalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,25 +58,32 @@ public class CreateJournalActivity extends AppCompatActivity
     @BindView(R.id.journalDescriptionET)
     EditText journalDescriptionET;
 
+    /**
+     * The onCreate method. Initializes the activity.
+     *
+     * @param savedInstanceState Saved Instance State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_journal);
+        ButterKnife.bind(this);
+        //Initial UI Setup
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ButterKnife.bind(this);
-
+        //Set up Navigation Menu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Closes the navigation drawer if it's open, otherwise exit the activity
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,6 +96,7 @@ public class CreateJournalActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+    //TO DO: Set up the navigation menu
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -101,11 +114,19 @@ public class CreateJournalActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Cancel Journal handler. If there's edits then show a confirm dialog, otherwise close activity.
+     *
+     * @param view the view
+     */
     @OnClick(R.id.backBTN)
     public void backHandler(View view) {
+        //Check if both ETs are empty
         if (TextUtils.isEmpty(journalDescriptionET.getText().toString()) && TextUtils.isEmpty(journalTitleET.getText().toString())) {
+            //Close the activity
             finish();
         } else {
+            //Create & Display an exit confirmation dialog
             new AlertDialog.Builder(CreateJournalActivity.this)
                     .setTitle("Exit Confirmation")
                     .setMessage("Are you sure you want to exit without saving your changes?")
@@ -121,37 +142,52 @@ public class CreateJournalActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Save handler. Saves the journal on Firebase Database
+     *
+     * @param view the view
+     */
     @OnClick(R.id.saveJournalBTN)
     public void saveHandler(View view) {
+        //Get journal info
         String journalTitle = journalTitleET.getText().toString();
         String journalDescription = journalDescriptionET.getText().toString();
-
         //Get current time
         String date = new SimpleDateFormat("dd/MM/yyyy hh:mma", Locale.getDefault()).format(new Date());
         Log.d("Date", date);
-
+        //Create new journal object
         Journal journal = new Journal(journalTitle, journalDescription, "", date);
+        //Get database reference
         DatabaseReference journalRef = mDatabase.getReference();
-
-        //Save the journal
+        //Check if the journal's title is empty
         if (!journalTitle.isEmpty()) {
+            //Save the journal
             journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    //Check if the data was saved successfully
                     if (task.isSuccessful()) {
+                        //Display success message
                         Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
+                        //Display error message
                         Toast.makeText(CreateJournalActivity.this, "There was an error while creating your journal. Please try again.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
+            //Set error
             journalTitleET.setError("Missing Journal Title!");
         }
     }
 
-    //@OnClick(R.id.imagePreviewIV)
+    /**
+     * Image selector. Does nothing ATM
+     *
+     * @param view the view
+     */
+//@OnClick(R.id.imagePreviewIV)
     public void imageSelector(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spin);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

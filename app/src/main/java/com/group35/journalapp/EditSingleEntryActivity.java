@@ -31,6 +31,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+/**
+ * The Edit single entry activity.
+ * <p>
+ * Created by Joshua on 9/18/2017
+ */
 public class EditSingleEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -57,14 +62,19 @@ public class EditSingleEntryActivity extends AppCompatActivity
     @BindView(R.id.decisionsContentET)
     EditText decisionsContentET;
 
+    /**
+     * The onCreate method. Initializes the activity.
+     *
+     * @param savedInstanceState Saved Instance State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_single_entry);
+        ButterKnife.bind(this);
+        //Setup UI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,6 +85,7 @@ public class EditSingleEntryActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Get intent & data
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
         mEntryObligations = intent.getStringExtra("entryObligations");
@@ -83,13 +94,16 @@ public class EditSingleEntryActivity extends AppCompatActivity
         mEntryNotes = intent.getStringExtra("entryNotes");
         mEntryVersion = intent.getStringExtra("entryVersion");
         mJournalID = intent.getStringExtra("journalID");
-
+        //Setup ETs
         obligationsContentET.setText(mEntryObligations);
         decisionsContentET.setText(mEntryDecisions);
         outcomeContentET.setText(mEntryOutcome);
         notesContentET.setText(mEntryNotes);
     }
 
+    /**
+     * Closes the navigation drawer if it's open, otherwise exit the activity
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -100,6 +114,12 @@ public class EditSingleEntryActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Inflate the menu
+     *
+     * @param menu The menu
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -107,51 +127,62 @@ public class EditSingleEntryActivity extends AppCompatActivity
         return true;
     }
 
+
+    /**
+     * Performs action depending on the clicked menu item
+     *
+     * @param item Selected menu item
+     * @return selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
+            //Get all data from edit texts
             final String newObligations = obligationsContentET.getText().toString();
             final String newDecisions = decisionsContentET.getText().toString();
             final String newOutcome = outcomeContentET.getText().toString();
             final String newNotes = notesContentET.getText().toString();
-
+            //Check if all fields have not been modified
             if (newObligations.equals(mEntryObligations) && newDecisions.equals(mEntryDecisions)
                     && newOutcome.equals(mEntryOutcome) && newNotes.equals(mEntryNotes)) {
+                //Display an error on no changes
                 Toast.makeText(EditSingleEntryActivity.this, "You have not made any changes.", Toast.LENGTH_SHORT).show();
             } else {
                 final ArrayList<String> entryContentList = new ArrayList<>();
-
-                //Save to database
+                //Get database reference
                 final DatabaseReference entryRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName())
                         .child(mJournalID).child(mEntryID).child("entryContentList");
-
+                //Get a new entry content key
                 final String newEntry = entryRef.push().getKey();
-
+                // Get list of entry contents
                 entryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Get all entry contents from the array list
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             entryContentList.add(snapshot.getValue(String.class));
                         }
+                        //Get current time
                         String date = new SimpleDateFormat("dd/MM/yyyy hh:mm:ssa", Locale.getDefault()).format(new Date());
+                        //Create new entry content
                         EntryContent entryContent = new EntryContent(newNotes, newObligations, newDecisions, newOutcome, date, entryContentList.size());
+                        //Add the entry to the array
                         entryContentList.add(newEntry);
+                        //Save the new array list
                         entryRef.setValue(entryContentList);
-
+                        // Get database reference
                         DatabaseReference journalDateRef = mDatabase.getReference().child("users").child(mUser.getDisplayName())
                                 .child("Journals").child(mJournalID).child("journalModifiedDate");
+                        //Set new last modified date
                         journalDateRef.setValue(date);
-
+                        // Update entry description
                         DatabaseReference entryDescriptionRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName())
                                 .child(mJournalID).child(mEntryID).child("entryPreview");
                         entryDescriptionRef.setValue(newNotes);
-
+                        // Update entry contents
                         DatabaseReference entryContentRef = mDatabase.getReference().child("EntryContents").child(mUser.getDisplayName())
                                 .child(mEntryID).child(newEntry);
                         entryContentRef.setValue(entryContent);
@@ -159,7 +190,7 @@ public class EditSingleEntryActivity extends AppCompatActivity
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        //Do nothing
                     }
                 });
             }
@@ -167,10 +198,15 @@ public class EditSingleEntryActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Performs action when navigation menu item is clicked
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {

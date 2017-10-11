@@ -25,6 +25,11 @@ import com.group35.journalapp.viewholders.EntryContentHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * The type Entry history activity.
+ * <p>
+ * Created by Joshua on 9/18/2017
+ */
 public class EntryHistoryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,14 +44,19 @@ public class EntryHistoryActivity extends AppCompatActivity
     @BindView(R.id.entryHistoryRV)
     RecyclerView entryHistoryRV;
 
+    /**
+     * The onCreate method. Initializes the activity.
+     *
+     * @param savedInstanceState Saved Instance State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry_history);
+        ButterKnife.bind(this);
+        //Setup UI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,16 +66,17 @@ public class EntryHistoryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //Get intent & data
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
         mEntryTitle = intent.getStringExtra("entryTitle");
-
+        //Setup RecyclerView
         entryHistoryRV.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         entryHistoryRV.addItemDecoration(dividerItemDecoration);
 
         DatabaseReference entryHistoryRef = mDatabase.getReference().child("EntryContents").child(mUser.getDisplayName()).child(mEntryID);
+        //Create new Adapter for RV
         FirebaseRecyclerAdapter<EntryContent, EntryContentHolder> mAdapter = new FirebaseRecyclerAdapter<EntryContent, EntryContentHolder>(
                 EntryContent.class,
                 R.layout.item_entry_history,
@@ -73,6 +84,7 @@ public class EntryHistoryActivity extends AppCompatActivity
                 entryHistoryRef) {
             @Override
             protected void populateViewHolder(EntryContentHolder viewHolder, EntryContent model, int position) {
+                //Set up view holder
                 viewHolder.setLastModifiedTimeTV(model.getEntryModifiedDate());
                 viewHolder.setEntryVersionTV("Entry Version: " + model.getEntryVersion());
                 viewHolder.setEntryObligationsTV("Obligations: \n" + model.getEntryObligations());
@@ -81,9 +93,13 @@ public class EntryHistoryActivity extends AppCompatActivity
                 viewHolder.setEntryChangesNoteTV("Notes: \n" + model.getEntryNotes());
             }
         };
+        //Set adapter
         entryHistoryRV.setAdapter(mAdapter);
     }
 
+    /**
+     * Closes the navigation drawer if it's open, otherwise exit the activity
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,6 +110,12 @@ public class EntryHistoryActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Performs action when navigation menu item is clicked
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

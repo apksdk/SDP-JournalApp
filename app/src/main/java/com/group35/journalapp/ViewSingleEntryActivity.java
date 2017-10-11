@@ -26,6 +26,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+/**
+ * The type View single entry activity.
+ * <p>
+ * Created by Joshua on 9/18/2017
+ */
 public class ViewSingleEntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -50,6 +55,11 @@ public class ViewSingleEntryActivity extends AppCompatActivity
     @BindView(R.id.decisionsContentTV)
     TextView decisionsContentTV;
 
+    /**
+     * The onCreate method. Initializes the activity.
+     *
+     * @param savedInstanceState Saved Instance State
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +105,9 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * Closes the navigation drawer if it's open, otherwise exit the activity
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -105,6 +118,12 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Inflate the menu
+     *
+     * @param menu The menu
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -112,11 +131,14 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Performs action depending on the clicked menu item
+     *
+     * @param item Selected menu item
+     * @return selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -145,6 +167,12 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Performs action when navigation menu item is clicked
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
