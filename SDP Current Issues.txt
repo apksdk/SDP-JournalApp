@@ -18,6 +18,7 @@ ViewEntriesActivity
 - Default description gets overwritten (like ViewJournalsActivity)
 - Floating Action Button is irrelevant to its function (add new entry)
 - No message to inform the user there's no entries in the journal
+- Deleted/Hidden option is not hidden for hidden/deleted listings
 
 CreateEntryActivity
 - Does not check if all text fields have data before submitting
