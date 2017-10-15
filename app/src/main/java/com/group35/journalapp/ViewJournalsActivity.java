@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -43,6 +44,9 @@ public class ViewJournalsActivity extends AppCompatActivity
 
     @BindView(R.id.viewJournalsRV)
     RecyclerView viewJournalsRV;
+
+    @BindView(R.id.noJournalHintTV)
+    TextView noJournalHintTV;
 
     /**
      * The onCreate method. Initializes the activity.
@@ -88,6 +92,11 @@ public class ViewJournalsActivity extends AppCompatActivity
                 journalsRef) {
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
+                //Hide no journal hint if it's visible
+                if(noJournalHintTV.getVisibility() == View.VISIBLE) {
+                    noJournalHintTV.setVisibility(View.INVISIBLE);
+                }
+
                 //Initialize Glide's loading options
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.placeholder(R.drawable.icon);
@@ -131,7 +140,7 @@ public class ViewJournalsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.view_menu, menu);
+        getMenuInflater().inflate(R.menu.view_journals_menu, menu);
         return true;
     }
 
@@ -168,11 +177,7 @@ public class ViewJournalsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {
-            // Handle the camera action
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            // Do nothing since user is already on this activity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

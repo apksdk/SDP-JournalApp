@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by Joshua on 9/27/2017.
  */
 public class Entry {
+    private String mJournalID;
     private String mEntryID;
     private String mEntryAuthor;
     private String mEntryTitle;
@@ -225,5 +226,19 @@ public class Entry {
      */
     public void setEntryDeleted_Hidden(String mEntryDeleted_Hidden) {
         this.mEntryDeleted_Hidden = mEntryDeleted_Hidden;
+    }
+
+    /**
+     * @return
+     */
+    public String getJournalID() {
+        return mJournalID;
+    }
+
+    /**
+     * @param mJournalID
+     */
+    public void setJournalID(String mJournalID) {
+        this.mJournalID = mJournalID;
     }
 }

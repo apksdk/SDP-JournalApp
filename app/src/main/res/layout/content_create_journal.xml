@@ -13,7 +13,7 @@
         android:id="@+id/spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/changeImageTV"
@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:text="Tap the icon to change the image"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/imagePreviewIV"
@@ -72,16 +72,20 @@
 
         <Button
             android:id="@+id/backBTN"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Back" />
+            android:text="Back"
+            android:theme="@style/ButtonColor" />
 
         <Button
             android:id="@+id/saveJournalBTN"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.60"
-            android:text="Save Journal" />
+            android:text="Save Journal"
+            android:theme="@style/ButtonColor" />
     </LinearLayout>
 </RelativeLayout>

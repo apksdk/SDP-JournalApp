@@ -40,11 +40,11 @@
 
     <EditText
         android:id="@+id/entryTitleET"
-        android:layout_width="wrap_content"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
         android:ems="10"
-        android:hint="Enter the entry name"
+        android:hint="Enter your entry name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/entryObligationsET"
         app:layout_constraintLeft_toLeftOf="@+id/entryTitleTV"
@@ -63,11 +63,11 @@
 
     <EditText
         android:id="@+id/entryObligationsET"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
         android:ems="10"
-        android:hint="Enter the details here..."
+        android:hint="Enter your obligations here..."
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/entryDecisionsET"
         app:layout_constraintLeft_toLeftOf="@+id/entryTitleET"
@@ -90,9 +90,9 @@
 
     <EditText
         android:id="@+id/entryDecisionsET"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Enter your decisions here..."
         android:inputType="textPersonName"
@@ -116,10 +116,10 @@
 
     <EditText
         android:id="@+id/entryOutcomesET"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter your decisions here..."
+        android:hint="Enter your outcome here..."
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="@+id/entryDecisionsET"
         app:layout_constraintRight_toRightOf="@+id/entryDecisionsET"
@@ -140,9 +140,9 @@
 
     <EditText
         android:id="@+id/entryNotesET"
-        android:layout_width="0dp"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="29dp"
         android:ems="10"
         android:hint="Enter your comments here..."
         android:inputType="textPersonName"
@@ -186,6 +186,8 @@
 
         <Button
             android:id="@+id/cancelEntryBTN"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ButtonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -193,6 +195,8 @@
 
         <Button
             android:id="@+id/entryConfirmBTN"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:theme="@style/ButtonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -1,6 +1,7 @@
 package com.group35.journalapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -162,13 +163,20 @@ public class CreateJournalActivity extends AppCompatActivity
         //Check if the journal's title is empty
         if (!journalTitle.isEmpty()) {
             //Save the journal
-            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journal).addOnCompleteListener(new OnCompleteListener<Void>() {
+            final String journalID = journalRef.push().getKey();
+            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journalID).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     //Check if the data was saved successfully
                     if (task.isSuccessful()) {
+                        //Create a new intent
+                        Intent intent = new Intent(CreateJournalActivity.this, ViewEntriesActivity.class);
+                        //Pass the journalID to the intent
+                        intent.putExtra("journalID", journalID);
+                        //Start activity with intent
+                        startActivity(intent);
                         //Display success message
-                        Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "You have successfully created a journal.", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
                         //Display error message

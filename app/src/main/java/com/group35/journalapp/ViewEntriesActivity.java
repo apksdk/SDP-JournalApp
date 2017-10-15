@@ -11,19 +11,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.group35.journalapp.models.Entry;
-import com.group35.journalapp.viewholders.EntryHolder;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,8 +49,15 @@ public class ViewEntriesActivity extends AppCompatActivity
 
     private String mJournalID;
     private boolean mToggleHiddenDeletedEntries;
+    private EntryAdapter mAdapter;
+    private ArrayList<Entry> mEntryList = new ArrayList<>();
 
     private MenuItem clickedItem;
+    private MenuItem searchItem;
+    private SearchView searchView;
+
+    @BindView(R.id.noEntriesHintTV)
+    TextView noEntriesHintTV;
 
     @BindView(R.id.viewEntriesRV)
     RecyclerView viewEntriesRV;
@@ -83,6 +95,7 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         //Get intent & data
         Intent intent = getIntent();
         mJournalID = intent.getStringExtra("journalID");
@@ -93,7 +106,10 @@ public class ViewEntriesActivity extends AppCompatActivity
         viewEntriesRV.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         viewEntriesRV.addItemDecoration(dividerItemDecoration);
-        setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED);
+        mAdapter = new EntryAdapter(this, mEntryList);
+        viewEntriesRV.setAdapter(mAdapter);
+
+        setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, false);
     }
 
     /**
@@ -101,7 +117,9 @@ public class ViewEntriesActivity extends AppCompatActivity
      *
      * @param setupCode Show either all or active entries
      */
-    private void setupRecyclerView(int setupCode) {
+    private void setupRecyclerView(final int setupCode, final boolean filteredKeywords) {
+        noEntriesHintTV.setVisibility(View.VISIBLE);
+
         DatabaseReference entriesRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName()).child(mJournalID);
         Query entriesQuery;
         //Check the user's selected option
@@ -112,29 +130,43 @@ public class ViewEntriesActivity extends AppCompatActivity
             //Filters entries that are not hidden/deleted
             entriesQuery = entriesRef.orderByChild("entryDeleted_Hidden").equalTo("false_false");
         }
-        //Setup adapter for RV
-        FirebaseRecyclerAdapter<Entry, EntryHolder> mAdapter = new FirebaseRecyclerAdapter<Entry, EntryHolder>(
-                Entry.class,
-                R.layout.item_journal_entry,
-                EntryHolder.class,
-                entriesQuery) {
+        //Setup RecyclerView's contents
+        entriesQuery.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void populateViewHolder(EntryHolder viewHolder, Entry model, int position) {
-                //Initialize the entry's view holder
-                viewHolder.setEntryTitleTV(model.getEntryTitle());
-                viewHolder.setEntryDescriptionTV(model.getEntryPreview());
-                viewHolder.setLastModifiedTimeTV(model.getLastModifyDate());
-                viewHolder.setEntryID(getRef(position).getKey());
-                viewHolder.setJournalID(mJournalID);
-                viewHolder.setDeleted(model.isJournalEntryDeleted());
-                viewHolder.setHidden(model.isJournalEntryHidden());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mEntryList.clear();
 
-                if (!model.getEntryContentList().isEmpty()) {
-                    viewHolder.setEntryVersion(model.getEntryContentList().get(model.getEntryContentList().size() - 1));
+                for (DataSnapshot entrySnapshot : dataSnapshot.getChildren()) {
+                    Entry entry = entrySnapshot.getValue(Entry.class);
+                    entry.setEntryID(entrySnapshot.getKey());
+                    entry.setJournalID(mJournalID);
+                    //Get search terms
+                    String keyword = searchView.getQuery().toString().trim().toLowerCase();
+                    //Check if filtering is on and there's text inside the search box
+                    if (filteredKeywords && !keyword.isEmpty()) {
+                        //Check if entry title contains the keyword
+                        if (!entry.getEntryTitle().toLowerCase().contains(keyword)) {
+                            continue;
+                        }
+                        //Add entry to array
+                        mEntryList.add(entry);
+                    } else {
+                        //Add entry to array
+                        mEntryList.add(entry);
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
+                //Hide no entry hint if it's visible
+                if (!mEntryList.isEmpty()) {
+                    noEntriesHintTV.setVisibility(View.GONE);
                 }
             }
-        };
-        viewEntriesRV.setAdapter(mAdapter);
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
@@ -159,10 +191,53 @@ public class ViewEntriesActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.view_menu, menu);
+        getMenuInflater().inflate(R.menu.view_entries_menu, menu);
+        // Initialize variables
         clickedItem = menu.findItem(R.id.action_toggle_view);
+        searchItem = (MenuItem) menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        // Setup the listeners for searching
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Clear focus so the method doesn't run twice
+                searchView.clearFocus();
+                //Check hidden/delete status
+                if (mToggleHiddenDeletedEntries) {
+                    setupRecyclerView(RV_SETUP_SHOW_HIDDEN_DELETED, true);
+                } else {
+                    setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, true);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        View closeButton = searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Clear query
+                searchView.setQuery("", false);
+                //Check hidden/delete status
+                if (mToggleHiddenDeletedEntries) {
+                    setupRecyclerView(RV_SETUP_SHOW_HIDDEN_DELETED, false);
+                } else {
+                    setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, false);
+                }
+                //Collapse View
+                searchView.onActionViewCollapsed();
+                //Collapse Item
+                searchItem.collapseActionView();
+            }
+        });
         return true;
     }
+
 
     /**
      * Performs action depending on the clicked menu item
@@ -183,11 +258,11 @@ public class ViewEntriesActivity extends AppCompatActivity
             if (mToggleHiddenDeletedEntries) {
                 clickedItem.setTitle("Show Hidden/Deleted Entries");
                 mToggleHiddenDeletedEntries = false;
-                setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED);
+                setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, false);
             } else {
                 clickedItem.setTitle("Hide Hidden/Deleted Entries");
                 mToggleHiddenDeletedEntries = true;
-                setupRecyclerView(RV_SETUP_SHOW_HIDDEN_DELETED);
+                setupRecyclerView(RV_SETUP_SHOW_HIDDEN_DELETED, false);
             }
         }
 
@@ -208,10 +283,6 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         if (id == R.id.nav_view_journals) {
             // Handle the camera action
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
