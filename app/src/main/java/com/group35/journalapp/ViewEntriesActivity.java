@@ -141,14 +141,20 @@ public class ViewEntriesActivity extends AppCompatActivity
                     entry.setEntryID(entrySnapshot.getKey());
                     entry.setJournalID(mJournalID);
                     //Get search terms
-                    String keyword = searchView.getQuery().toString().trim().toLowerCase();
+                    String keywords[] = searchView.getQuery().toString().trim().toLowerCase().split("\\s+");
                     //Check if filtering is on and there's text inside the search box
-                    if (filteredKeywords && !keyword.isEmpty()) {
+                    if (filteredKeywords && !(keywords.length == 0)) {
                         //Check if entry title contains the keyword
-                        if (!entry.getEntryTitle().toLowerCase().contains(keyword)) {
+                        boolean matchFound = false;
+                        for(String keyword : keywords ) {
+                            if (entry.getEntryTitle().toLowerCase().contains(keyword)) {
+                                matchFound = true;
+                            }
+                        }
+
+                        if(!matchFound) {
                             continue;
                         }
-                        //Add entry to array
                         mEntryList.add(entry);
                     } else {
                         //Add entry to array

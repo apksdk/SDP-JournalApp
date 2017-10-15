@@ -164,7 +164,7 @@ public class CreateJournalActivity extends AppCompatActivity
         if (!journalTitle.isEmpty()) {
             //Save the journal
             final String journalID = journalRef.push().getKey();
-            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").push().setValue(journalID).addOnCompleteListener(new OnCompleteListener<Void>() {
+            journalRef.child("users").child(mUser.getDisplayName()).child("Journals").child(journalID).setValue(journal).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     //Check if the data was saved successfully
