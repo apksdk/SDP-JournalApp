@@ -1,42 +1,42 @@
-All Activities
+All Activities (0/2)
 - Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
 - Navigation Menu does not update username/email/profile pic
 
-ViewJournalsActivity
+ViewJournalsActivity (2/4)
 - No messages to display the app is loading data
-- No message to display there's no journals created under the user's account
+[x] No message to display there's no journals created under the user's account
 - Default description gets overwritten even though there's nothing to overwrite with
-- Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
+[x] Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
 
-CreateJournalActivity
+CreateJournalActivity (0/2)
 - No message to inform saving journal
 - Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewEntriesActivity
+ViewEntriesActivity (2/5)
 - Placeholder pic is irrelevant to the application
 - Default description gets overwritten (like ViewJournalsActivity)
-- Floating Action Button is irrelevant to its function (add new entry)
-- No message to inform the user there's no entries in the journal
+[x] Floating Action Button is irrelevant to its function (add new entry)
+[x] No message to inform the user there's no entries in the journal
 - Deleted/Hidden option is not hidden for hidden/deleted listings
 
-CreateEntryActivity
+CreateEntryActivity (1/5)
 - Does not check if all text fields have data before submitting
-- Incorrect hints in text fields
+[x] Incorrect hints in text fields
 - Obligations/Decisions/Outcomes/Additional Comments do not expand downwards when
-- (Optional) Can't add attachments
 the entered text is more than 1 line. (Makes it hard to review what they wrote)
+- (Optional) Can't add attachments
 - Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewSingleEntryActivity
+ViewSingleEntryActivity (0/2)
 - No way to tell which selected entry is this
 - Image View loads nothing
 
-EditEntryActivity
+EditEntryActivity (0/3)
 - Useless ImageViews
 - Does not check for changes when leaving (Should confirm exit to avoid accidental info loss)
 - No dialog to inform saving changes
 
-ViewEditHistoryActivity
+ViewEditHistoryActivity (0/1)
 - Placeholder image is irrelevant to the item
