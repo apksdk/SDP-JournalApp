@@ -14,15 +14,15 @@ This will be maintained by Team Leader Walter, Main Developer Joshua and Alex.
 - [X] Sign out of the Journal
 - [X] Record Date & Time of Entry
 - [X] Flag/Hide Entries
-- [ ] Show Active, Show Hidden, Show Flagged, Show All
+- [X] Show Active, Show Hidden, Show Flagged, Show All
 - [?] Display Entries by Date (Displays by newest created to oldest entry)
 - [X] Record Journal and Entry changes
 - [X] Display Entry Changes (Entry History)
-- [ ] Keyword Search Function (Biggie)
+- [X] Keyword Search Function (Biggie)
 
 ### Functional Optional 1/4
 - [X] Record Obligations, Decisions & Outcomes
-- [ ] Delete an Entry (Optional)
+- [X] Delete an Entry (Optional)
 - [ ] Change Skins (Optional)
 - [ ] Record Voice, Video or Images (Optional)
 
