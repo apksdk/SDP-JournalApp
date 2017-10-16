@@ -20,7 +20,7 @@
         android:layout_toRightOf="@+id/journalPreviewIV"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Short Description" />
+        android:text="There's no description." />
 
     <!--Probably not going to use this-->
     <TextView

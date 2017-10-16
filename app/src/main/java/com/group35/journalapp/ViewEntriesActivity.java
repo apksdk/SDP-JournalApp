@@ -16,8 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -95,6 +98,22 @@ public class ViewEntriesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Set up request options for Glide
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon));
+        //Set user details on navigation menu
+        final View navView = navigationView.getHeaderView(0);
+        final TextView usernameNavTV = navView.findViewById(R.id.navUsernameTV);
+        TextView emailNavTV = navView.findViewById(R.id.navEmailTV);
+        ImageView userNavAvatarIV = navView.findViewById(R.id.navAvatarIV);
+        usernameNavTV.setText(mUser.getDisplayName());
+
+        //Set up nav image
+        emailNavTV.setText(mUser.getEmail());
+        Glide.with(this)
+                .setDefaultRequestOptions(requestOptions)
+                .load(mUser.getPhotoUrl())
+                .into(userNavAvatarIV);
 
         //Get intent & data
         Intent intent = getIntent();
@@ -108,8 +127,6 @@ public class ViewEntriesActivity extends AppCompatActivity
         viewEntriesRV.addItemDecoration(dividerItemDecoration);
         mAdapter = new EntryAdapter(this, mEntryList);
         viewEntriesRV.setAdapter(mAdapter);
-
-        setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, false);
     }
 
     /**
@@ -117,6 +134,8 @@ public class ViewEntriesActivity extends AppCompatActivity
      *
      * @param setupCode Show either all or active entries
      */
+    private ValueEventListener mListener;
+
     private void setupRecyclerView(final int setupCode, final boolean filteredKeywords) {
         noEntriesHintTV.setVisibility(View.VISIBLE);
 
@@ -131,7 +150,7 @@ public class ViewEntriesActivity extends AppCompatActivity
             entriesQuery = entriesRef.orderByChild("entryDeleted_Hidden").equalTo("false_false");
         }
         //Setup RecyclerView's contents
-        entriesQuery.addValueEventListener(new ValueEventListener() {
+        mListener = entriesQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mEntryList.clear();
@@ -184,7 +203,8 @@ public class ViewEntriesActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+//            super.onBackPressed();
         }
     }
 
@@ -241,6 +261,10 @@ public class ViewEntriesActivity extends AppCompatActivity
                 searchItem.collapseActionView();
             }
         });
+        //Set up recycler view here instead of onCreate, as searchView won't be initialized
+        //and will cause a null pointer crash
+        setupRecyclerView(RV_SETUP_HIDE_HIDDEN_DELETED, false);
+
         return true;
     }
 
@@ -294,5 +318,11 @@ public class ViewEntriesActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        mDatabase.getReference().removeEventListener(mListener);
+        super.onDestroy();
     }
 }

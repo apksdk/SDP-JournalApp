@@ -10,9 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -77,6 +81,22 @@ public class ViewSingleEntryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Set up request options for Glide
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon));
+        //Set user details on navigation menu
+        final View navView = navigationView.getHeaderView(0);
+        final TextView usernameNavTV = navView.findViewById(R.id.navUsernameTV);
+        TextView emailNavTV = navView.findViewById(R.id.navEmailTV);
+        ImageView userNavAvatarIV = navView.findViewById(R.id.navAvatarIV);
+        usernameNavTV.setText(mUser.getDisplayName());
+
+        //Set up nav image
+        emailNavTV.setText(mUser.getEmail());
+        Glide.with(this)
+                .setDefaultRequestOptions(requestOptions)
+                .load(mUser.getPhotoUrl())
+                .into(userNavAvatarIV);
 
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
@@ -160,7 +180,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
             editEntryIntent.putExtra("journalID", mJournalID);
             //Start edit entry activity
             startActivity(editEntryIntent);
-        } else if( id == R.id.action_view_history) {
+        } else if (id == R.id.action_view_history) {
             //Create intent & save relevant data before starting activity
             Intent entryHistoryIntent = new Intent(ViewSingleEntryActivity.this, EntryHistoryActivity.class);
             entryHistoryIntent.putExtra("entryID", mEntryID);
@@ -184,11 +204,12 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {
-            // Handle the camera action
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
+        } else if (id == R.id.nav_view_logout) {
+            mAuth.signOut();
+            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

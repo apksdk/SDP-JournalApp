@@ -1,6 +1,7 @@
 package com.group35.journalapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,7 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -79,6 +82,24 @@ public class ViewJournalsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Set up request options for Glide
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon));
+        //Set user details on navigation menu
+        final View navView = navigationView.getHeaderView(0);
+        final TextView usernameNavTV = navView.findViewById(R.id.navUsernameTV);
+        TextView emailNavTV = navView.findViewById(R.id.navEmailTV);
+        ImageView userNavAvatarIV = navView.findViewById(R.id.navAvatarIV);
+        usernameNavTV.setText(mUser.getDisplayName());
+
+        //Set up nav image
+        emailNavTV.setText(mUser.getEmail());
+        Glide.with(this)
+                .setDefaultRequestOptions(requestOptions)
+                .load(mUser.getPhotoUrl())
+                .into(userNavAvatarIV);
+
+
         //Setup RecyclerView
         viewJournalsRV.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -107,7 +128,9 @@ public class ViewJournalsActivity extends AppCompatActivity
                         .into(viewHolder.getJournalPreviewIV());
                 //Setup view holder
                 viewHolder.setJournalTitleTV(model.getJournalName());
-                viewHolder.setDescriptionTV(model.getJournalDescription());
+                if(!model.getJournalDescription().isEmpty()) {
+                    viewHolder.setDescriptionTV(model.getJournalDescription());
+                }
                 viewHolder.setDateTV(model.getJournalModifiedDate());
                 viewHolder.setJournalID(getRef(position).getKey());
                 if (model.getJournalEntries() != null) {
@@ -177,7 +200,12 @@ public class ViewJournalsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {
-            // Do nothing since user is already on this activity
+            //Do nothing since user is already in the activity
+        } else if (id == R.id.nav_view_logout) {
+            mAuth.signOut();
+            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

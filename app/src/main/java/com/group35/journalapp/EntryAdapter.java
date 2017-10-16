@@ -3,13 +3,14 @@ package com.group35.journalapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -119,6 +120,10 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
          */
         @OnLongClick(R.id.entryLayout)
         public boolean longClickHandler(View view) {
+            if (mHidden || mDeleted) {
+                Toast.makeText(mContext, "This entry has already been marked as deleted/hidden.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
             //Initialize the options list
             CharSequence entryOptions[] = {"Delete Entry", "Hide Entry"};
             //Initialize & display a dialog for the options
@@ -229,9 +234,9 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
      * an item.
-     *
+     * <p>
      * The new ViewHolder will be used to display items of the adapter using
-     * {@link #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
+     * onBindViewHolder. Since it will be re-used to display
      * different items in the data set, it is a good idea to cache references to sub views of
      * the View to avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -261,7 +266,9 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
         Entry model = mEntryList.get(position);
         //Initialize the entry's view holder
         viewHolder.mEntryTitleTV.setText(model.getEntryTitle());
-        viewHolder.mEntryDescriptionTV.setText(model.getEntryPreview());
+        if (!model.getEntryPreview().isEmpty()) {
+            viewHolder.mEntryDescriptionTV.setText(model.getEntryPreview());
+        }
         viewHolder.mLastModifiedTimeTV.setText(model.getLastModifyDate());
         viewHolder.setEntryID(model.getEntryID());
         viewHolder.setJournalID(model.getJournalID());

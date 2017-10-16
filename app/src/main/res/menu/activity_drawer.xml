@@ -9,16 +9,12 @@
         <!--BELOW - To be renamed-->
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Account">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_view_logout"
+                android:icon="@drawable/ic_menu_logout"
+                android:title="Sign Out" />
         </menu>
     </item>
 

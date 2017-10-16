@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/entryTitleTV"
         android:layout_toRightOf="@+id/entryPreviewIV"
-        android:text="Short Description"
+        android:ellipsize="end"
         android:maxLines="2"
-        android:ellipsize="end"/>
+        android:text="There's no preview." />
 
     <TextView
         android:id="@+id/entryTitleTV"
@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/entryPreviewIV"
         android:layout_toRightOf="@+id/journalPreviewIV"
-        android:text="Journal #1" />
+        android:text="Entry #1" />
 
     <ImageView
         android:id="@+id/entryPreviewIV"

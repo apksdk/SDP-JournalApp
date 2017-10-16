@@ -12,7 +12,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,6 +72,22 @@ public class EntryHistoryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Set up request options for Glide
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon));
+        //Set user details on navigation menu
+        final View navView = navigationView.getHeaderView(0);
+        final TextView usernameNavTV = navView.findViewById(R.id.navUsernameTV);
+        TextView emailNavTV = navView.findViewById(R.id.navEmailTV);
+        ImageView userNavAvatarIV = navView.findViewById(R.id.navAvatarIV);
+        usernameNavTV.setText(mUser.getDisplayName());
+
+        //Set up nav image
+        emailNavTV.setText(mUser.getEmail());
+        Glide.with(this)
+                .setDefaultRequestOptions(requestOptions)
+                .load(mUser.getPhotoUrl())
+                .into(userNavAvatarIV);
         //Get intent & data
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
@@ -123,11 +145,12 @@ public class EntryHistoryActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {
-            // Handle the camera action
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
+        } else if (id == R.id.nav_view_logout) {
+            mAuth.signOut();
+            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

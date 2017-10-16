@@ -20,9 +20,9 @@
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
+        android:id="@+id/navUsernameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/navUsernameTV"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="John Doe"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
