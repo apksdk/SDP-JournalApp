@@ -134,7 +134,7 @@ public class ViewJournalsActivity extends AppCompatActivity
 
                 //Initialize Glide's loading options
                 RequestOptions requestOptions = new RequestOptions();
-                requestOptions.placeholder(R.drawable.icon);
+                requestOptions.placeholder(R.drawable.journalicon);
                 //Load image using Glide
                 Glide.with(ViewJournalsActivity.this)
                         .setDefaultRequestOptions(requestOptions)

@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -150,6 +151,12 @@ public class CreateJournalActivity extends AppCompatActivity
      */
     @OnClick(R.id.saveJournalBTN)
     public void saveHandler(View view) {
+        //Initialize progress dialog
+        final ProgressDialog saveProgressDialog = new ProgressDialog(this);
+        saveProgressDialog.setMessage("Saving Journal...");
+        saveProgressDialog.setCancelable(false);
+        saveProgressDialog.show();
+
         //Get journal info
         String journalTitle = journalTitleET.getText().toString();
         String journalDescription = journalDescriptionET.getText().toString();
@@ -182,6 +189,7 @@ public class CreateJournalActivity extends AppCompatActivity
                         //Display error message
                         Toast.makeText(CreateJournalActivity.this, "There was an error while creating your journal. Please try again.", Toast.LENGTH_SHORT).show();
                     }
+                    saveProgressDialog.dismiss();
                 }
             });
         } else {

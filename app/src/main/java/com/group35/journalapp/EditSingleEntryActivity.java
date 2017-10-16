@@ -1,8 +1,10 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -212,6 +216,10 @@ public class EditSingleEntryActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
+            //Initialize progress dialog
+            final ProgressDialog saveProgressDialog = new ProgressDialog(this);
+            saveProgressDialog.setMessage("Saving Journal...");
+            saveProgressDialog.setCancelable(false);
             //Get all data from edit texts
             final String newObligations = obligationsContentET.getText().toString();
             final String newDecisions = decisionsContentET.getText().toString();
@@ -223,6 +231,7 @@ public class EditSingleEntryActivity extends AppCompatActivity
                 //Display an error on no changes
                 Toast.makeText(EditSingleEntryActivity.this, "You have not made any changes.", Toast.LENGTH_SHORT).show();
             } else {
+                saveProgressDialog.show();
                 final ArrayList<String> entryContentList = new ArrayList<>();
                 //Get database reference
                 final DatabaseReference entryRef = mDatabase.getReference().child("Entries").child(mUser.getDisplayName())
@@ -257,7 +266,20 @@ public class EditSingleEntryActivity extends AppCompatActivity
                         // Update entry contents
                         DatabaseReference entryContentRef = mDatabase.getReference().child("EntryContents").child(mUser.getDisplayName())
                                 .child(mEntryID).child(newEntry);
-                        entryContentRef.setValue(entryContent);
+                        entryContentRef.setValue(entryContent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    //Display a success message
+                                    Toast.makeText(EditSingleEntryActivity.this, "You have successfully modified the entry!", Toast.LENGTH_SHORT).show();
+                                    //Close the current activity
+                                    finish();
+                                } else {
+                                    Toast.makeText(EditSingleEntryActivity.this, "There was an error while attempting to save your changes. Please try again.", Toast.LENGTH_LONG);
+                                }
+                                saveProgressDialog.dismiss();
+                            }
+                        });
                     }
 
                     @Override

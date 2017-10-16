@@ -12,23 +12,22 @@
         android:id="@+id/logoTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="167dp"
+        android:layout_below="@+id/logoIV"
+        android:layout_centerHorizontal="true"
         android:text="NotePro"
-        android:textSize="20sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/usernameET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email/Username"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/logoTV"
         android:layout_alignLeft="@+id/passwordET"
         android:layout_alignStart="@+id/passwordET"
-        android:layout_marginTop="47dp" />
+        android:layout_below="@+id/logoTV"
+        android:layout_marginTop="47dp"
+        android:ems="12"
+        android:hint="Email/Username"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/passwordET"
@@ -36,37 +35,43 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameET"
         android:layout_centerHorizontal="true"
-        android:ems="10"
+        android:ems="12"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/loginBTN"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordET"
+        android:ems="8"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:text="Login" />
+        android:text="Login"
+        android:theme="@style/ButtonColor" />
 
     <Button
         android:id="@+id/registerBTN"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_below="@+id/loginBTN"
         android:layout_alignLeft="@+id/loginBTN"
         android:layout_alignStart="@+id/loginBTN"
-        android:layout_marginTop="12dp" />
+        android:ems="8"
+        android:layout_below="@+id/loginBTN"
+        android:layout_marginTop="12dp"
+        android:text="Register"
+        android:theme="@style/ButtonColor" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/icon"
-        android:layout_marginTop="12dp"
+        android:id="@+id/logoIV"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="48dp"
+        app:srcCompat="@drawable/logo" />
 
 </RelativeLayout>

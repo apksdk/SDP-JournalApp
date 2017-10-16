@@ -12,8 +12,8 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
-        app:srcCompat="@drawable/icon" />
+        android:layout_marginTop="48dp"
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/logoTV"
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logoIV"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
         android:text="NotePro"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/usernameET"
@@ -31,8 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logoTV"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="24dp"
-        android:ems="10"
+        android:ems="12"
         android:hint="Username"
         android:inputType="textPersonName" />
 
@@ -43,7 +44,8 @@
         android:layout_alignLeft="@+id/usernameET"
         android:layout_alignStart="@+id/usernameET"
         android:layout_below="@+id/usernameET"
-        android:ems="10"
+        android:layout_marginBottom="8dp"
+        android:ems="12"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
@@ -54,7 +56,8 @@
         android:layout_alignLeft="@+id/emailET"
         android:layout_alignStart="@+id/emailET"
         android:layout_below="@+id/emailET"
-        android:ems="10"
+        android:layout_marginBottom="8dp"
+        android:ems="12"
         android:hint="Password"
         android:inputType="textPassword" />
 
@@ -65,17 +68,20 @@
         android:layout_alignLeft="@+id/passwordET"
         android:layout_alignStart="@+id/passwordET"
         android:layout_below="@+id/passwordET"
-        android:ems="10"
+        android:layout_marginBottom="16dp"
+        android:ems="12"
         android:hint="Confirm Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/registerBTN"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/confirmPassET"
         android:layout_centerHorizontal="true"
-        android:fontFamily="Register"
-        android:text="Register" />
+        android:ems="8"
+        android:text="Register"
+        android:theme="@style/ButtonColor" />
 
 </RelativeLayout>

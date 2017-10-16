@@ -193,6 +193,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
             editEntryIntent.putExtra("journalID", mJournalID);
             //Start edit entry activity
             startActivity(editEntryIntent);
+            finish();
         } else if (id == R.id.action_view_history) {
             //Create intent & save relevant data before starting activity
             Intent entryHistoryIntent = new Intent(ViewSingleEntryActivity.this, EntryHistoryActivity.class);

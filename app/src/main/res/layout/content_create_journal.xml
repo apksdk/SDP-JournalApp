@@ -27,11 +27,11 @@
 
     <ImageView
         android:id="@+id/imagePreviewIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:srcCompat="@drawable/journalicon"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/icon" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/journalTitleTV"

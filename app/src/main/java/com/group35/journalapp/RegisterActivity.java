@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -67,6 +68,11 @@ public class RegisterActivity extends AppCompatActivity {
     @OnClick(R.id.registerBTN)
     public void registerAccount() {
         if (validateForm()) {
+            //Initialize progress dialog
+            final ProgressDialog saveProgressDialog = new ProgressDialog(this);
+            saveProgressDialog.setMessage("Registering your account...");
+            saveProgressDialog.setCancelable(false);
+            saveProgressDialog.show();
             //Register account with email & pass
             mAuth.createUserWithEmailAndPassword(emailET.getText().toString(), passwordET.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -90,8 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 ref.child(usernameET.getText().toString()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()) {
-                                            Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_SHORT).show();
+                                        if (task.isSuccessful()) {
+                                            saveProgressDialog.dismiss();
+                                            Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_LONG).show();
                                             startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
                                             finish();
                                         }
@@ -137,6 +144,15 @@ public class RegisterActivity extends AppCompatActivity {
                 validForm = false;
             }
         }
+        // Check if username is valid .', '#', '$', '[', or ']
+        String invalidCharacters[] = {".", "#", "$", "[", "]"};
+        for(String invalidChar : invalidCharacters) {
+            if(usernameET.getText().toString().contains(invalidChar)) {
+                validForm = false;
+                usernameET.setError("Your username cannot contain the following characters: \n. # $ [ ]");
+            }
+        }
+
         return validForm;
     }
 }

@@ -1,10 +1,10 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -158,6 +157,11 @@ public class CreateEntryActivity extends AppCompatActivity
     @OnClick(R.id.entryConfirmBTN)
     //TO DO: Check if ALL fields have data before saving
     public void saveHandler(View view) {
+        //Initialize progress dialog
+        final ProgressDialog saveProgressDialog = new ProgressDialog(this);
+        saveProgressDialog.setMessage("Saving Entry...");
+        saveProgressDialog.setCancelable(false);
+        saveProgressDialog.show();
         // Get all information
         String entryTitle = entryTitleET.getText().toString();
         String entryAuthor = mUser.getDisplayName();
@@ -176,12 +180,12 @@ public class CreateEntryActivity extends AppCompatActivity
 
         boolean isComplete = true;
         //Check if entry contains any empty fields, and display an error if there is any
-        for(int i = 0; i < createEntryLayout.getChildCount(); i++) {
+        for (int i = 0; i < createEntryLayout.getChildCount(); i++) {
             //Check if current view is an EditText
-            if(createEntryLayout.getChildAt(i) instanceof EditText) {
+            if (createEntryLayout.getChildAt(i) instanceof EditText) {
                 EditText currentET = (EditText) createEntryLayout.getChildAt(i);
                 //Check if ET is empty
-                if(currentET.getText().toString().isEmpty()) {
+                if (currentET.getText().toString().isEmpty()) {
                     isComplete = false;
                     currentET.setError("This field cannot be empty!");
                 }
@@ -202,10 +206,15 @@ public class CreateEntryActivity extends AppCompatActivity
             entryRef.child("EntryContents").child(mUser.getDisplayName()).child(entryID).child(entryContentsList.get(0)).setValue(entryContent).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    //Display a success message
-                    Toast.makeText(CreateEntryActivity.this, "You have successfully created an entry!", Toast.LENGTH_SHORT).show();
-                    //Close the current activity
-                    finish();
+                    if (task.isSuccessful()) {
+                        //Display a success message
+                        Toast.makeText(CreateEntryActivity.this, "You have successfully created an entry!", Toast.LENGTH_SHORT).show();
+                        //Close the current activity
+                        finish();
+                    } else {
+                        Toast.makeText(CreateEntryActivity.this, "There was an error while attempting to save your entry. Please try again.", Toast.LENGTH_LONG);
+                    }
+                    saveProgressDialog.dismiss();
                 }
             });
         }
