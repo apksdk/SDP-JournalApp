@@ -13,12 +13,13 @@ CreateJournalActivity (0/2)
 - Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewEntriesActivity (2/5)
+ViewEntriesActivity (3/6)
 - Placeholder pic is irrelevant to the application
 - Default description gets overwritten (like ViewJournalsActivity)
 [x] Floating Action Button is irrelevant to its function (add new entry)
 [x] No message to inform the user there's no entries in the journal
 - Deleted/Hidden option is not hidden for hidden/deleted listings
+[x] App Crashes when the user exits then re-enters the activity
 
 CreateEntryActivity (1/5)
 - Does not check if all text fields have data before submitting
