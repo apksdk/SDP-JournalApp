@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +73,7 @@ public class CreateEntryActivity extends AppCompatActivity
     ImageView addMediaIV;
 
     @BindView(R.id.createEntryLayout)
-    ConstraintLayout createEntryLayout;
+    LinearLayout createEntryLayout;
 
     /**
      * The onCreate method. Initializes the activity.
@@ -120,20 +122,17 @@ public class CreateEntryActivity extends AppCompatActivity
      * Closes the navigation drawer if it's open, otherwise exit the activity
      */
     @Override
-    //TO DO: Check if the user has inputted anything, if there is confirm exit before quitting
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            //TO DO: Confirm Exit
-            super.onBackPressed();
+            confirmExit();
         }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    //TO DO: Set up the navigation menu
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -174,8 +173,22 @@ public class CreateEntryActivity extends AppCompatActivity
         EntryContent entryContent = new EntryContent(entryNotes, entryObligations, entryDecisions, entryOutcomes, date, 0);
         //Get database reference
         DatabaseReference entryRef = mDatabase.getReference();
-        //Check if entry title is empty, and display an error if it is
-        if (!entryTitle.isEmpty()) {
+
+        boolean isComplete = true;
+        //Check if entry contains any empty fields, and display an error if there is any
+        for(int i = 0; i < createEntryLayout.getChildCount(); i++) {
+            //Check if current view is an EditText
+            if(createEntryLayout.getChildAt(i) instanceof EditText) {
+                EditText currentET = (EditText) createEntryLayout.getChildAt(i);
+                //Check if ET is empty
+                if(currentET.getText().toString().isEmpty()) {
+                    isComplete = false;
+                    currentET.setError("This field cannot be empty!");
+                }
+            }
+        }
+
+        if (isComplete) {
             //Create new entry content array
             ArrayList<String> entryContentsList = new ArrayList<>();
             //Add the generated id to the array
@@ -195,9 +208,6 @@ public class CreateEntryActivity extends AppCompatActivity
                     finish();
                 }
             });
-        } else {
-            //Create an error message for the EditText
-            entryTitleET.setError("Missing Entry Title!");
         }
     }
 
@@ -208,6 +218,14 @@ public class CreateEntryActivity extends AppCompatActivity
      */
     @OnClick(R.id.cancelEntryBTN)
     public void cancelEntryHandler(View view) {
+        confirmExit();
+    }
+
+    /**
+     * Verifies whether the user has any inputted information, and prompts the user if they want to
+     * exit without saving their changes if they have any.
+     */
+    private void confirmExit() {
         Boolean isEmpty = true;
         //Loop through all elements inside the activity layout
         for (int i = 0; i < createEntryLayout.getChildCount(); i++) {
@@ -218,26 +236,27 @@ public class CreateEntryActivity extends AppCompatActivity
                 //Check if it's empty, and display a confirm dialog if it isn't
                 if (!currentET.getText().toString().isEmpty()) {
                     isEmpty = false;
-                    //Initialize & Display dialog
-                    new AlertDialog.Builder(CreateEntryActivity.this)
-                            .setTitle("Exit Confirmation")
-                            .setMessage("Are you sure you want to exit without saving your changes?")
-                            .setIcon(R.drawable.warning)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    //Closes the activity
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton("No", null)
-                            .show();
                 }
             }
         }
         //If it's empty then exit activity
         if (isEmpty) {
             finish();
+        } else {
+            //Initialize & Display dialog
+            new AlertDialog.Builder(CreateEntryActivity.this)
+                    .setTitle("Exit Confirmation")
+                    .setMessage("Are you sure you want to exit without saving your changes?")
+                    .setIcon(R.drawable.warning)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Closes the activity
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
 }

@@ -110,7 +110,7 @@ public class CreateJournalActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            confirmExit();
         }
     }
 
@@ -141,25 +141,7 @@ public class CreateJournalActivity extends AppCompatActivity
      */
     @OnClick(R.id.backBTN)
     public void backHandler(View view) {
-        //Check if both ETs are empty
-        if (TextUtils.isEmpty(journalDescriptionET.getText().toString()) && TextUtils.isEmpty(journalTitleET.getText().toString())) {
-            //Close the activity
-            finish();
-        } else {
-            //Create & Display an exit confirmation dialog
-            new AlertDialog.Builder(CreateJournalActivity.this)
-                    .setTitle("Exit Confirmation")
-                    .setMessage("Are you sure you want to exit without saving your changes?")
-                    .setIcon(R.drawable.warning)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        }
+        confirmExit();
     }
 
     /**
@@ -206,6 +188,31 @@ public class CreateJournalActivity extends AppCompatActivity
         } else {
             //Set error
             journalTitleET.setError("Missing Journal Title!");
+        }
+    }
+
+    /**
+     * Confirm if the form does not have any unsaved information and asks the user to confirm before exiting
+     */
+    private void confirmExit() {
+        //Check if both ETs are empty
+        if (TextUtils.isEmpty(journalDescriptionET.getText().toString()) && TextUtils.isEmpty(journalTitleET.getText().toString())) {
+            //Close the activity
+            finish();
+        } else {
+            //Create & Display an exit confirmation dialog
+            new AlertDialog.Builder(CreateJournalActivity.this)
+                    .setTitle("Exit Confirmation")
+                    .setMessage("Are you sure you want to exit without saving your changes?")
+                    .setIcon(R.drawable.warning)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
 
