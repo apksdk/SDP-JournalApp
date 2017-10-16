@@ -2,26 +2,30 @@ All Activities (2/2)
 [x] Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
 [x] Navigation Menu does not update username/email/profile pic
 
+RegisterActivity (2/2)
+[x] No message when registering the user
+[x] Allows invalid characters '.', '#', '$', '[', or ']'
+
 ViewJournalsActivity (4/4)
 [x] No messages to display the app is loading data
 [x] No message to display there's no journals created under the user's account
 [x] Default description gets overwritten even though there's nothing to overwrite with
 [x] Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
 
-CreateJournalActivity (0/2)
-- No message to inform saving journal
+CreateJournalActivity (2/2)
+[x] No message to inform saving journal
 [x] Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewEntriesActivity (5/6)
-- Placeholder pic is irrelevant to the application
+ViewEntriesActivity (6/6)
+[x] Placeholder pic is irrelevant to the application
 [x] Default description gets overwritten (like ViewJournalsActivity)
 [x] Floating Action Button is irrelevant to its function (add new entry)
 [x] No message to inform the user there's no entries in the journal
 [x] Deleted/Hidden option is not hidden for hidden/deleted listings
 [x] App Crashes when the user exits then re-enters the activity
 
-CreateEntryActivity (4/6)
+CreateEntryActivity (5/6)
 [x] Does not check if all text fields have data before submitting
 [x] Incorrect hints in text fields
 [x] Obligations/Decisions/Outcomes/Additional Comments do not expand downwards when
@@ -29,18 +33,19 @@ the entered text is more than 1 line. (Makes it hard to review what they wrote)
 - (Optional) Can't add attachments
 [x] Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
-- No message informing save
+[x] No message informing save
 
-ViewSingleEntryActivity (2/3)
+ViewSingleEntryActivity (3/3)
 [x] No way to tell which selected entry is this
 [x] Image View loads nothing
 [x] No message informing loading data
 
-EditEntryActivity (2/3)
+EditEntryActivity (3/3)
 [x] Useless ImageViews
 [x] Does not check for changes when leaving (Should confirm exit to avoid accidental info loss)
-- No dialog to inform saving changes
+[x] No dialog to inform saving changes
 
-ViewEditHistoryActivity (1/2)
-- Placeholder image is irrelevant to the item
+ViewEditHistoryActivity (3/3)
+[x] Placeholder image is irrelevant to the item
 [x] No loading message
+[x] No save message
