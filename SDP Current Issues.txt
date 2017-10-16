@@ -2,8 +2,8 @@ All Activities (2/2)
 [x] Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
 [x] Navigation Menu does not update username/email/profile pic
 
-ViewJournalsActivity (3/4)
-- No messages to display the app is loading data
+ViewJournalsActivity (4/4)
+[x] No messages to display the app is loading data
 [x] No message to display there's no journals created under the user's account
 [x] Default description gets overwritten even though there's nothing to overwrite with
 [x] Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
@@ -34,12 +34,13 @@ entered data in the activity.
 ViewSingleEntryActivity (2/3)
 [x] No way to tell which selected entry is this
 [x] Image View loads nothing
-- No message informing loading data
+[x] No message informing loading data
 
-EditEntryActivity (0/3)
-- Useless ImageViews
-- Does not check for changes when leaving (Should confirm exit to avoid accidental info loss)
+EditEntryActivity (2/3)
+[x] Useless ImageViews
+[x] Does not check for changes when leaving (Should confirm exit to avoid accidental info loss)
 - No dialog to inform saving changes
 
-ViewEditHistoryActivity (0/1)
+ViewEditHistoryActivity (1/2)
 - Placeholder image is irrelevant to the item
+[x] No loading message
