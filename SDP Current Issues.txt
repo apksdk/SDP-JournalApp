@@ -1,11 +1,11 @@
-All Activities (0/2)
-- Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
-- Navigation Menu does not update username/email/profile pic
+All Activities (2/2)
+[x] Navigation Menu (3 Lines on top Left) does not have any code to navigate between forms
+[x] Navigation Menu does not update username/email/profile pic
 
-ViewJournalsActivity (2/4)
+ViewJournalsActivity (3/4)
 - No messages to display the app is loading data
 [x] No message to display there's no journals created under the user's account
-- Default description gets overwritten even though there's nothing to overwrite with
+[x] Default description gets overwritten even though there's nothing to overwrite with
 [x] Settings (i.e. right top ellipses) should not contain "Show Hidden/Deleted"
 
 CreateJournalActivity (0/2)
@@ -13,12 +13,12 @@ CreateJournalActivity (0/2)
 - Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewEntriesActivity (3/6)
+ViewEntriesActivity (5/6)
 - Placeholder pic is irrelevant to the application
-- Default description gets overwritten (like ViewJournalsActivity)
+[x] Default description gets overwritten (like ViewJournalsActivity)
 [x] Floating Action Button is irrelevant to its function (add new entry)
 [x] No message to inform the user there's no entries in the journal
-- Deleted/Hidden option is not hidden for hidden/deleted listings
+[x] Deleted/Hidden option is not hidden for hidden/deleted listings
 [x] App Crashes when the user exits then re-enters the activity
 
 CreateEntryActivity (1/5)
