@@ -10,7 +10,7 @@ ViewJournalsActivity (3/4)
 
 CreateJournalActivity (0/2)
 - No message to inform saving journal
-- Pressing back on the device does not trigger the confirm exit dialog if there's
+[x] Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
 ViewEntriesActivity (5/6)
@@ -21,14 +21,15 @@ ViewEntriesActivity (5/6)
 [x] Deleted/Hidden option is not hidden for hidden/deleted listings
 [x] App Crashes when the user exits then re-enters the activity
 
-CreateEntryActivity (1/5)
-- Does not check if all text fields have data before submitting
+CreateEntryActivity (4/6)
+[x] Does not check if all text fields have data before submitting
 [x] Incorrect hints in text fields
-- Obligations/Decisions/Outcomes/Additional Comments do not expand downwards when
+[x] Obligations/Decisions/Outcomes/Additional Comments do not expand downwards when
 the entered text is more than 1 line. (Makes it hard to review what they wrote)
 - (Optional) Can't add attachments
-- Pressing back on the device does not trigger the confirm exit dialog if there's
+[x] Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
+- No message informing save
 
 ViewSingleEntryActivity (2/3)
 [x] No way to tell which selected entry is this
