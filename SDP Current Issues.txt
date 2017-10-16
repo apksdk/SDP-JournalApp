@@ -30,9 +30,10 @@ the entered text is more than 1 line. (Makes it hard to review what they wrote)
 - Pressing back on the device does not trigger the confirm exit dialog if there's
 entered data in the activity.
 
-ViewSingleEntryActivity (0/2)
-- No way to tell which selected entry is this
-- Image View loads nothing
+ViewSingleEntryActivity (2/3)
+[x] No way to tell which selected entry is this
+[x] Image View loads nothing
+- No message informing loading data
 
 EditEntryActivity (0/3)
 - Useless ImageViews
