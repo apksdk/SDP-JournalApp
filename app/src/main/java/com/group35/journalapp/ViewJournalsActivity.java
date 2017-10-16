@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +101,12 @@ public class ViewJournalsActivity extends AppCompatActivity
                 .load(mUser.getPhotoUrl())
                 .into(userNavAvatarIV);
 
+        //Setup Progress Dialog
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Journals...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
 
         //Setup RecyclerView
         viewJournalsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -111,6 +119,12 @@ public class ViewJournalsActivity extends AppCompatActivity
                 R.layout.item_journal,
                 JournalHolder.class,
                 journalsRef) {
+            @Override
+            public void onDataChanged() {
+                progressDialog.dismiss();
+                super.onDataChanged();
+            }
+
             @Override
             protected void populateViewHolder(JournalHolder viewHolder, Journal model, int position) {
                 //Hide no journal hint if it's visible

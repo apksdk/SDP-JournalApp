@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -54,6 +56,7 @@ public class ViewEntriesActivity extends AppCompatActivity
     private boolean mToggleHiddenDeletedEntries;
     private EntryAdapter mAdapter;
     private ArrayList<Entry> mEntryList = new ArrayList<>();
+    private ProgressDialog mProgressDialog;
 
     private MenuItem clickedItem;
     private MenuItem searchItem;
@@ -115,6 +118,12 @@ public class ViewEntriesActivity extends AppCompatActivity
                 .load(mUser.getPhotoUrl())
                 .into(userNavAvatarIV);
 
+        //Setup Progress Dialog
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Loading Entries...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+
         //Get intent & data
         Intent intent = getIntent();
         mJournalID = intent.getStringExtra("journalID");
@@ -165,13 +174,13 @@ public class ViewEntriesActivity extends AppCompatActivity
                     if (filteredKeywords && !(keywords.length == 0)) {
                         //Check if entry title contains the keyword
                         boolean matchFound = false;
-                        for(String keyword : keywords ) {
+                        for (String keyword : keywords) {
                             if (entry.getEntryTitle().toLowerCase().contains(keyword)) {
                                 matchFound = true;
                             }
                         }
 
-                        if(!matchFound) {
+                        if (!matchFound) {
                             continue;
                         }
                         mEntryList.add(entry);
@@ -180,6 +189,7 @@ public class ViewEntriesActivity extends AppCompatActivity
                         mEntryList.add(entry);
                     }
                 }
+                mProgressDialog.dismiss();
                 mAdapter.notifyDataSetChanged();
                 //Hide no entry hint if it's visible
                 if (!mEntryList.isEmpty()) {
@@ -312,7 +322,12 @@ public class ViewEntriesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_view_journals) {
-            // Handle the camera action
+            startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
+        } else if (id == R.id.nav_view_logout) {
+            mAuth.signOut();
+            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT);
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -147,6 +147,9 @@ public class LoginActivity extends AppCompatActivity {
      * @param password The password
      */
     private void loginUser(String username, String password) {
+        if(mAuth.getCurrentUser() != null && mAuth.getCurrentUser().isAnonymous()) {
+            mAuth.signOut();
+        }
         //Sign in
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override

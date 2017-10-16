@@ -1,18 +1,22 @@
 package com.group35.journalapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +58,7 @@ public class EditSingleEntryActivity extends AppCompatActivity
     private String mEntryNotes;
     private String mEntryVersion;
     private String mJournalID;
+    private String mEntryTitle;
 
     @BindView(R.id.obligationsContentET)
     EditText obligationsContentET;
@@ -66,6 +71,12 @@ public class EditSingleEntryActivity extends AppCompatActivity
 
     @BindView(R.id.decisionsContentET)
     EditText decisionsContentET;
+
+    @BindView(R.id.editEntryLayout)
+    RelativeLayout editEntryLayout;
+
+    @BindView(R.id.entryTitleTV)
+    TextView entryTitleTV;
 
     /**
      * The onCreate method. Initializes the activity.
@@ -109,13 +120,15 @@ public class EditSingleEntryActivity extends AppCompatActivity
         //Get intent & data
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
+        mEntryTitle = intent.getStringExtra("entryTitle");
         mEntryObligations = intent.getStringExtra("entryObligations");
         mEntryDecisions = intent.getStringExtra("entryDecisions");
         mEntryOutcome = intent.getStringExtra("entryOutcome");
         mEntryNotes = intent.getStringExtra("entryNotes");
         mEntryVersion = intent.getStringExtra("entryVersion");
         mJournalID = intent.getStringExtra("journalID");
-        //Setup ETs
+        //Setup UI Views
+        entryTitleTV.setText(mEntryTitle);
         obligationsContentET.setText(mEntryObligations);
         decisionsContentET.setText(mEntryDecisions);
         outcomeContentET.setText(mEntryOutcome);
@@ -131,7 +144,45 @@ public class EditSingleEntryActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            confirmExit();
+        }
+    }
+
+    /**
+     * Confirm if the form does not have any unsaved information and asks the user to confirm before exiting
+     */
+    private void confirmExit() {
+        Boolean isEmpty = true;
+        //Loop through all elements inside the activity layout
+        for (int i = 0; i < editEntryLayout.getChildCount(); i++) {
+            //Check if the current element is an EditText
+            if (editEntryLayout.getChildAt(i) instanceof EditText) {
+                //Set current element as an EditText
+                EditText currentET = (EditText) editEntryLayout.getChildAt(i);
+                //Check if it's empty, and display a confirm dialog if it isn't
+                if (!currentET.getText().toString().isEmpty()) {
+                    isEmpty = false;
+                }
+            }
+        }
+        //If it's empty then exit activity
+        if (isEmpty) {
+            finish();
+        } else {
+            //Initialize & Display dialog
+            new AlertDialog.Builder(EditSingleEntryActivity.this)
+                    .setTitle("Exit Confirmation")
+                    .setMessage("Are you sure you want to exit without making changes?")
+                    .setIcon(R.drawable.warning)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Closes the activity
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
     }
 

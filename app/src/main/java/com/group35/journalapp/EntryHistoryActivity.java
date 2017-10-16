@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -88,6 +89,13 @@ public class EntryHistoryActivity extends AppCompatActivity
                 .setDefaultRequestOptions(requestOptions)
                 .load(mUser.getPhotoUrl())
                 .into(userNavAvatarIV);
+
+        //Setup Progress Dialog
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Entry History...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         //Get intent & data
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
@@ -104,6 +112,12 @@ public class EntryHistoryActivity extends AppCompatActivity
                 R.layout.item_entry_history,
                 EntryContentHolder.class,
                 entryHistoryRef) {
+            @Override
+            public void onDataChanged() {
+                progressDialog.dismiss();
+                super.onDataChanged();
+            }
+
             @Override
             protected void populateViewHolder(EntryContentHolder viewHolder, EntryContent model, int position) {
                 //Set up view holder

@@ -1,5 +1,6 @@
 package com.group35.journalapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -101,6 +102,12 @@ public class ViewSingleEntryActivity extends AppCompatActivity
                 .load(mUser.getPhotoUrl())
                 .into(userNavAvatarIV);
 
+        //Setup Progress Dialog
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Entry...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         Intent intent = getIntent();
         mEntryID = intent.getStringExtra("entryID");
         mEntryTitle = intent.getStringExtra("entryTitle");
@@ -114,6 +121,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
         entryContentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
                 EntryContent entryContent = dataSnapshot.getValue(EntryContent.class);
                 obligationsContentTV.setText(entryContent.getEntryObligations());
                 outcomeContentTV.setText(entryContent.getEntryOutcomes());
@@ -176,6 +184,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
             Intent editEntryIntent = new Intent(ViewSingleEntryActivity.this, EditSingleEntryActivity.class);
             //Save entry content into the intent
             editEntryIntent.putExtra("entryID", mEntryID);
+            editEntryIntent.putExtra("entryTitle", mEntryTitle);
             editEntryIntent.putExtra("entryObligations", obligations);
             editEntryIntent.putExtra("entryDecisions", decisions);
             editEntryIntent.putExtra("entryOutcome", outcome);
