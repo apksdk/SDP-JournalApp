@@ -47,5 +47,5 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginRight="8dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+        app:srcCompat="@drawable/icon" />
 </RelativeLayout>

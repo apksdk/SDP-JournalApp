@@ -59,6 +59,9 @@ public class ViewSingleEntryActivity extends AppCompatActivity
     @BindView(R.id.decisionsContentTV)
     TextView decisionsContentTV;
 
+    @BindView(R.id.entryTitleTV)
+    TextView entryTitleTV;
+
     /**
      * The onCreate method. Initializes the activity.
      *
@@ -116,6 +119,7 @@ public class ViewSingleEntryActivity extends AppCompatActivity
                 outcomeContentTV.setText(entryContent.getEntryOutcomes());
                 notesContentTV.setText(entryContent.getEntryNotes());
                 decisionsContentTV.setText(entryContent.getEntryDecisions());
+                entryTitleTV.setText(mEntryTitle);
             }
 
             @Override
