@@ -160,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     //Start activity
                     startActivity(new Intent(LoginActivity.this, ViewJournalsActivity.class));
+                    Toast.makeText(LoginActivity.this, "You have successfully signed in", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     //Show login failed message

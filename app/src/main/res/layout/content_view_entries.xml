@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:textAlignment="center"
         android:layout_centerHorizontal="true"
-        android:text="Long tap an entry to display additional \n options" />
+        android:text="Long tap an entry to display \n additional options" />
 
     <TextView
         android:id="@+id/noEntriesHintTV"
