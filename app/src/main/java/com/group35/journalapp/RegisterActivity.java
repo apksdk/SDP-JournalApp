@@ -32,6 +32,7 @@ import butterknife.OnClick;
  */
 public class RegisterActivity extends AppCompatActivity {
 
+    public static final String USERS = "users";
     @BindView(R.id.registerLayout)
     RelativeLayout registerLayout;
 
@@ -70,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (validateForm()) {
             //Initialize progress dialog
             final ProgressDialog saveProgressDialog = new ProgressDialog(this);
-            saveProgressDialog.setMessage("Registering your account...");
+            saveProgressDialog.setMessage(getString(R.string.registering_account_message));
             saveProgressDialog.setCancelable(false);
             saveProgressDialog.show();
             //Register account with email & pass
@@ -86,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         .build();
                                 mAuth.getCurrentUser().updateProfile(profileChangeRequest);
                                 //Get database reference
-                                DatabaseReference ref = mDatabase.getReference().child("users");
+                                DatabaseReference ref = mDatabase.getReference().child(USERS);
                                 //Get current user
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 String uID = currentUser.getUid();
@@ -98,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             saveProgressDialog.dismiss();
-                                            Toast.makeText(getBaseContext(), "You have successfully registered & now logged in.", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getBaseContext(), R.string.registration_success_message, Toast.LENGTH_LONG).show();
                                             startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
                                             finish();
                                         }
@@ -106,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 });
                             } else {
                                 //Show error for failed registration
-                                Toast.makeText(RegisterActivity.this, "Registration failed, please try again.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, R.string.registration_failed_message, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

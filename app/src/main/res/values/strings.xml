@@ -15,6 +15,11 @@
     <!--For Login Activity-->
     <string name="sign_in_message">Attempting to sign in...</string>
     <string name="title_edit_single_entry">Edit An Entry</string>
+    <string name="missing_login_info_message">Missing Login Information</string>
+    <string name="auth_failed">Authentication failed, please try again.</string>
+    <string name="registering_account_message">Registering your account...</string>
+    <string name="registration_success_message"><![CDATA[You have successfully registered & now logged in.]]></string>
+    <string name="registration_failed_message">Registration failed, please try again.</string>
 
     <!--For Register Activity-->
 

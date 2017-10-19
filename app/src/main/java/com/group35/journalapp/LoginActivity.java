@@ -32,6 +32,8 @@ import butterknife.OnClick;
  * Created by Joshua on 9/18/2017
  */
 public class LoginActivity extends AppCompatActivity {
+    public static final String USERS = "users";
+    public static final String EMAIL = "email";
     @BindView(R.id.usernameET)
     EditText usernameET;
 
@@ -104,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         //Check if username & pass is empty
         if (TextUtils.isEmpty(username[0]) || TextUtils.isEmpty(password)) {
             //Show error message
-            Toast.makeText(this, "Missing Login Information", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.missing_login_info_message, Toast.LENGTH_SHORT).show();
         } else {
             //Show login message
             progressDialog.show();
@@ -113,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 //Get database reference
                 DatabaseReference ref = mDatabase.getReference();
                 //Get user's email address
-                ref.child("users").child(username[0]).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
+                ref.child(USERS).child(username[0]).child(EMAIL).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
@@ -123,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                             loginUser(username[0], password);
                         } else {
                             //Show error message as there's no matching emails
-                            Toast.makeText(LoginActivity.this, "Authentication failed, please try again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }
@@ -161,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     //Show login failed message
-                    Toast.makeText(LoginActivity.this, "Authentication failed, please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
                 }
                 progressDialog.dismiss();
             }
