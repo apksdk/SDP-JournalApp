@@ -125,7 +125,7 @@ public class CreateJournalActivity extends AppCompatActivity
             startActivity(new Intent(getBaseContext(), ViewJournalsActivity.class));
         } else if (id == R.id.nav_view_logout) {
             mAuth.signOut();
-            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT);
+            Toast.makeText(getBaseContext(), "You have signed out successfully", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getBaseContext(), LoginActivity.class));
             finish();
         }

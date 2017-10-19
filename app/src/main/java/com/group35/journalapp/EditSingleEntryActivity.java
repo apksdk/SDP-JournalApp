@@ -275,7 +275,7 @@ public class EditSingleEntryActivity extends AppCompatActivity
                                     //Close the current activity
                                     finish();
                                 } else {
-                                    Toast.makeText(EditSingleEntryActivity.this, "There was an error while attempting to save your changes. Please try again.", Toast.LENGTH_LONG);
+                                    Toast.makeText(EditSingleEntryActivity.this, "There was an error while attempting to save your changes. Please try again.", Toast.LENGTH_LONG).show();
                                 }
                                 saveProgressDialog.dismiss();
                             }

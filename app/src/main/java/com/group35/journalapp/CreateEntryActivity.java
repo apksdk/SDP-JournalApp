@@ -212,7 +212,7 @@ public class CreateEntryActivity extends AppCompatActivity
                         //Close the current activity
                         finish();
                     } else {
-                        Toast.makeText(CreateEntryActivity.this, "There was an error while attempting to save your entry. Please try again.", Toast.LENGTH_LONG);
+                        Toast.makeText(CreateEntryActivity.this, "There was an error while attempting to save your entry. Please try again.", Toast.LENGTH_LONG).show();
                     }
                     saveProgressDialog.dismiss();
                 }
